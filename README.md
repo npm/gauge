@@ -15,6 +15,9 @@ gauge.pulse("this")
 gauge.hide()
 ```
 
+![](https://github.com/iarna/gauge/blob/master/example.png)
+
+
 ### `var gauge = new Gauge([options], [ansiStream])`
 
 * **options** – *(optional)* An option object. (See [below] for details.)
