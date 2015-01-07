@@ -68,7 +68,7 @@ ProgressBar.prototype.hide = function() {
 }
 
 var repeat = function (str, count) {
-  var out = ''
+  var out = ""
   for (var ii=0; ii<count; ++ii) out += str
   return out
 }
