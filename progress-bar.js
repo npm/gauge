@@ -1,7 +1,6 @@
 "use strict"
 var hasUnicode = require("has-unicode")
 var ansi = require("ansi")
-var stream = require("stream")
 
 var ProgressBar = module.exports = function (options, cursor) {
   if (! options) options = {}
