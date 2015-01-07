@@ -1,6 +1,6 @@
 {
   "name": "gauge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A terminal based horizontal guage",
   "main": "progress-bar.js",
   "scripts": {
