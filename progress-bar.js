@@ -140,20 +140,20 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
   var output = {prebar: "", postbar: ""}
   var status = "prebar"
   template.forEach(function(T) {
-    if (typeof T == "string") {
+    if (typeof T === "string") {
       output[status] += T
       return
     }
-    if (T.type == "completionbar") {
+    if (T.type === "completionbar") {
       status = "postbar"
       return
     }
     if (!values.hasOwnProperty(T.type)) throw new Error("Unknown template value '"+T.type+"'")
     var value = values[T.type]
-    if (value == null || value=="") return
+    if (value == null || value==="") return
     var sofar = output[status].length
     var lastChar = sofar ? output[status][sofar-1] : null
-    if (T.separated && sofar && lastChar != " ") {
+    if (T.separated && sofar && lastChar !== " ") {
       output[status] += " "
     }
     if (T.maxLength) value = value.substr(0,T.maxLength)
@@ -162,7 +162,7 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
   })
 
   var bar = ""
-  if (status == "postbar") {
+  if (status === "postbar") {
     var nonBarLen = output.prebar.length + output.postbar.length
 
     var barLen = process.stdout.columns - nonBarLen
