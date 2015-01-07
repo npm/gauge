@@ -135,7 +135,7 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
   values.endgroup = theme.endgroup
   values.spinner = values.spinner
     ? theme.spinner.substr(values.spinner % theme.spinner.length,1)
-    : "";
+    : ""
 
   var output = {prebar: "", postbar: ""}
   var status = "prebar"
@@ -150,7 +150,7 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
     }
     if (!values.hasOwnProperty(T.type)) throw new Error("Unknown template value '"+T.type+"'")
     var value = values[T.type]
-    if (value == null || value==="") return
+    if (value == null || value === "") return
     var sofar = output[status].length
     var lastChar = sofar ? output[status][sofar-1] : null
     if (T.separated && sofar && lastChar !== " ") {
