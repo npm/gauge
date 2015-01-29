@@ -118,7 +118,7 @@ will be turned into the gauge line.  The default template is:
 ]
 ```
 
-Objects must have a type and can optionally have the `separated` property. 
+Objects must have a type and can optionally have the `separated` property.
 If the `separated` property is included then, if a value for this item is
 available it will be separated from other parts of the template by spaces.
 
