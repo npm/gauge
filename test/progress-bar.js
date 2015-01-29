@@ -40,19 +40,19 @@ function isOutput(t, msg, output) {
     }
   }
   tests.forEach(function(test) {
-    t.is(cursor[test.cmd] ? cursor[test.cmd][test.arg] : null, 
+    t.is(cursor[test.cmd] ? cursor[test.cmd][test.arg] : null,
          output[test.cmd][test.arg],
          msg + ": " + output[test.cmd] + (test.arg ? " arg #"+test.arg : ""))
   })
 }
 
-test("hide", function (t) { 
+test("hide", function (t) {
   t.plan(11)
-  process.stdout.isTTY = false
+  process.stderr.isTTY = false
   bar.hide()
   t.is(cursor.length, 0, "We don't progress bar without a tty")
   cursor = []
-  process.stdout.isTTY = true
+  process.stderr.isTTY = true
   bar.hide()
   isOutput(t, "hide while not showing",[
     ["show"], // cursor
@@ -70,7 +70,7 @@ test("hide", function (t) {
 
 test("renderTemplate", function (t) {
   t.plan(16)
-  process.stdout.columns = 10
+  process.stderr.columns = 11
   var result = bar.renderTemplate(ProgressBar.ascii,[{type: "name"}],{name: "NAME"})
   t.is(result, "NAME", "name substitution")
   var result = bar.renderTemplate(ProgressBar.ascii,[{type: "completionbar"}],{completed: 0})
@@ -108,21 +108,22 @@ test("renderTemplate", function (t) {
 test("show & pulse", function (t) {
   t.plan(23)
 
-  process.stdout.columns = 16
+  process.stderr.columns = 16
   cursor = []
-  process.stdout.isTTY = false
+  process.stderr.isTTY = false
+  bar.template[0].length = 6
   bar.last = new Date(0)
   bar.show("NAME", 0)
   t.is(cursor.length, 0, "no tty, no progressbar")
 
   cursor = []
-  process.stdout.isTTY = true
+  process.stderr.isTTY = true
   bar.last = new Date(0)
   bar.show("NAME", 0.1)
   isOutput(t, "tty, name, completion",
     [ [ 'hide' ],
       [ 'horizontalAbsolute', 0 ],
-      [ 'write', 'NAME |#-------|\n' ],
+      [ 'write', 'NAME   |#-----|\n' ],
       [ 'show' ] ])
 
   bar.show("S")
@@ -133,9 +134,8 @@ test("show & pulse", function (t) {
     [ [ 'up', 1 ],
       [ 'hide' ],
       [ 'horizontalAbsolute', 0 ],
-      [ 'write', 'S \\ |#--------|\n' ],
+      [ 'write', 'S      \\ |----|\n' ],
       [ 'show' ] ])
-
   cursor = []
   bar.last = new Date(0)
   bar.pulse("P")

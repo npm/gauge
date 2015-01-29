@@ -1,6 +1,19 @@
 "use strict"
 var hasUnicode = require("has-unicode")
 var ansi = require("ansi")
+var align = {
+  center: require("lodash.pad"),
+  left:   require("lodash.padright"),
+  right:  require("lodash.padleft")
+}
+var defaultStream = process.stderr
+function isTTY() {
+  return process.stderr.isTTY
+}
+function getWritableTTYColumns() {
+  // One less than the actual as writing to the final column wraps the line
+  return process.stderr.columns - 1
+}
 
 var ProgressBar = module.exports = function (options, cursor) {
   if (! options) options = {}
@@ -9,18 +22,17 @@ var ProgressBar = module.exports = function (options, cursor) {
     options = {}
   }
   if (! cursor) {
-    cursor = ansi(process.stderr)
+    cursor = ansi(defaultStream)
   }
   this.cursor = cursor
   this.showing = false
   this.theme = options.theme || (hasUnicode() ? ProgressBar.unicode : ProgressBar.ascii)
   this.template = options.template || [
-    {type: "name", separated: true},
+    {type: "name", separated: true, length: 25},
     {type: "spinner", separated: true},
     {type: "startgroup"},
     {type: "completionbar"},
-    {type: "endgroup"},
-    "\n"
+    {type: "endgroup"}
   ]
   this.updatefreq = options.maxUpdateFrequency || 50
   this.lastName = ""
@@ -59,7 +71,7 @@ ProgressBar.prototype.enable = function() {
 }
 
 ProgressBar.prototype.hide = function() {
-  if (!process.stdout.isTTY) return
+  if (!isTTY()) return
   if (this.disabled) return
   this.cursor.show()
   if (this.showing) this.cursor.up(1)
@@ -79,8 +91,8 @@ ProgressBar.prototype.pulse = function(name) {
   if (this.disabled) return
 
   var baseName = this.lastName
-  name = name 
-       ? ( baseName 
+  name = name
+       ? ( baseName
          ? baseName + " " + this.theme.subsection + " " + name
          : null )
        : baseName
@@ -92,8 +104,7 @@ ProgressBar.prototype.show = function(name, completed) {
   name = this.lastName = name || this.lastName
   completed = this.lastCompleted = completed || this.lastCompleted
 
-
-  if (!process.stdout.isTTY) return
+  if (!isTTY()) return
   if (this.disabled) return
   if (! this.spun && ! completed) return
   if (this.tryAgain) {
@@ -124,7 +135,11 @@ ProgressBar.prototype.show = function(name, completed) {
     var statusline = self.renderTemplate(self.theme, self.template, values)
 
     if (self.showing) self.cursor.up(1)
-    self.cursor.hide().horizontalAbsolute(0).write(statusline).show()
+    self.cursor
+        .hide()
+        .horizontalAbsolute(0)
+        .write(statusline.substr(0, getWritableTTYColumns()) + "\n")
+        .show()
 
     self.showing = true
   }
@@ -139,6 +154,7 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
 
   var output = {prebar: "", postbar: ""}
   var status = "prebar"
+  var self = this
   template.forEach(function(T) {
     if (typeof T === "string") {
       output[status] += T
@@ -149,14 +165,13 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
       return
     }
     if (!values.hasOwnProperty(T.type)) throw new Error("Unknown template value '"+T.type+"'")
-    var value = values[T.type]
-    if (value == null || value === "") return
+    var value = self.renderValue(T, values[T.type])
+    if (value === "") return
     var sofar = output[status].length
     var lastChar = sofar ? output[status][sofar-1] : null
     if (T.separated && sofar && lastChar !== " ") {
       output[status] += " "
     }
-    if (T.maxLength) value = value.substr(0,T.maxLength)
     output[status] += value
     if (T.separated) output[status] += " "
   })
@@ -165,7 +180,7 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
   if (status === "postbar") {
     var nonBarLen = output.prebar.length + output.postbar.length
 
-    var barLen = process.stdout.columns - nonBarLen
+    var barLen = getWritableTTYColumns() - nonBarLen
     var sofar = Math.round(barLen * Math.max(0,Math.min(1,values.completed||0)))
     var rest = barLen - sofar
     bar = repeat(theme.complete, sofar)
@@ -173,4 +188,14 @@ ProgressBar.prototype.renderTemplate = function (theme, template, values) {
   }
 
   return output.prebar + bar + output.postbar
+}
+ProgressBar.prototype.renderValue = function (template, value) {
+  if (value == null || value === "") return ""
+  var maxLength = template.maxLength || template.length
+  var minLength = template.minLength || template.length
+  var alignWith = align[template.align] || align.left
+//  if (maxLength) value = value.substr(-1 * maxLength)
+  if (maxLength) value = value.substr(0, maxLength)
+  if (minLength) value = alignWith(value, minLength)
+  return value
 }

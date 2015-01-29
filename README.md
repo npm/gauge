@@ -109,29 +109,44 @@ will be turned into the gauge line.  The default template is:
 
 ```javascript
 [
-    {type: "name", separated: true},
+    {type: "name", separated: true, maxLength: 25, minWidth: 25, align: "left"},
     {type: "spinner", separated: true},
     {type: "startgroup"},
     {type: "completionbar"},
-    {type: "endgroup"},
-    "\n"
+    {type: "endgroup"}
 ]
 ```
 
-Objects must have a type and can optionally have the `separated` property.
-If the `separated` property is included then, if a value for this item is
-available it will be separated from other parts of the template by spaces.
+The various template elements can either be **plain strings**, in which case they will
+be be included verbatum in the output.
 
-### Differences
+If the template element is an object, it can have the following keys:
 
-The biggest difference between this module and the many other progress bar
-modules on npm is that this one doesn't maintain mutable state.  That is,
-while the completion percentage is cached, it can't be incremented or
-decremented, only replaced.  This substantially reduces the complexity of
-the module.
+* *type* can be:
+  * `name` – The most recent name passed to `show`; if this is in response to a 
+    `pulse` then the name passed to `pulse` will be appended along with the
+    subsection property from the theme.
+  * `spinner` – If you've ever called `pulse` this will be one of the characters
+    from the spinner property of the theme.
+  * `startgroup` – The `startgroup` property from the theme.
+  * `completionbar` – This progress bar itself
+  * `endgroup` – The `endgroup` property from the theme.
+* *separated* – If true, the element will be separated with spaces from things on
+  either side (and margins count as space, so it won't be indented), but only
+  if its included.
+* *maxLength* – The maximum length for this element. If its value is longer it
+  will be truncated.
+* *minLength* – The minimum length for this element. If its value is shorter it
+  will be padded according to the *align* value.
+* *align* – (Default: left) Possible values "left", "right" and "center". Works
+  as you'd expect from word processors.
+* *length* – Provides a single value for both *minLength* and *maxLength*. If both 
+  *length* and *minLength or *maxLength* are specifed then the latter take precedence.
+
+### Tracking Completion
 
 If you have more than one thing going on that you want to track completion
-if, you may find the related [are-we-there-yet] helpful.  It's `change`
+of, you may find the related [are-we-there-yet] helpful.  It's `change`
 event can be wired up to the `show` method to get a more traditional
 progress bar interface.
 
