@@ -81,6 +81,14 @@ Hides the gauge and ignores further calls to `show` or `pulse`.
 
 Shows the gauge and resumes updating when `show` or `pulse` is called.
 
+### `gauge.setTheme(theme)`
+
+Change the active theme, will be displayed with the next show or pulse
+
+### `gauge.setTemplate(template)`
+
+Change the active template, will be displayed with the next show or pulse
+
 ### Theme Objects
 
 There are two theme objects available as a part of the module, `Gauge.unicode` and `Gauge.ascii`.

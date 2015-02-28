@@ -60,6 +60,14 @@ ProgressBar.ascii = {
   subsection: "->"
 }
 
+ProgressBar.prototype.setTheme = function(theme) {
+  this.theme = theme
+}
+
+ProgressBar.prototype.setTemplate = function(template) {
+  this.template = template
+}
+
 ProgressBar.prototype.disable = function() {
   this.hide()
   this.disabled = true
