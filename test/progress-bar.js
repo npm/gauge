@@ -146,3 +146,31 @@ test("show & pulse", function (t) {
       [ 'write', 'S -> P | |----|\n' ],
       [ 'show' ] ])
 })
+
+test("window resizing", function (t) {
+  t.plan(16)
+  process.stderr.isTTY = true
+  process.stdout.columns = 32
+  bar.show("NAME", 0.1)
+  cursor = []
+  bar.last = new Date(0)
+  bar.pulse()
+  isOutput(t, "32 columns",
+    [ [ 'up', 1 ],
+      [ 'hide' ],
+      [ 'horizontalAbsolute', 0 ],
+      [ 'write', 'NAME   / |##------------------|\n' ],
+      [ 'show' ] ])
+
+  process.stdout.columns = 16
+  bar.show("NAME", 0.5)
+  cursor = []
+  bar.last = new Date(0)
+  bar.pulse()
+  isOutput(t, "16 columns",
+    [ [ 'up', 1 ],
+      [ 'hide' ],
+      [ 'horizontalAbsolute', 0 ],
+      [ 'write', 'NAME   - |##--|\n' ],
+      [ 'show' ] ]);
+});
