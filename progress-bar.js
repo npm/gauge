@@ -12,7 +12,7 @@ function isTTY() {
 }
 function getWritableTTYColumns() {
   // One less than the actual as writing to the final column wraps the line
-  return process.stderr.columns - 1
+  return process.stdout.columns - 1
 }
 
 var ProgressBar = module.exports = function (options, cursor) {

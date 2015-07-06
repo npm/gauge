@@ -70,7 +70,7 @@ test("hide", function (t) {
 
 test("renderTemplate", function (t) {
   t.plan(16)
-  process.stderr.columns = 11
+  process.stdout.columns = 11
   var result = bar.renderTemplate(ProgressBar.ascii,[{type: "name"}],{name: "NAME"})
   t.is(result, "NAME", "name substitution")
   var result = bar.renderTemplate(ProgressBar.ascii,[{type: "completionbar"}],{completed: 0})
@@ -108,7 +108,7 @@ test("renderTemplate", function (t) {
 test("show & pulse", function (t) {
   t.plan(23)
 
-  process.stderr.columns = 16
+  process.stdout.columns = 16
   cursor = []
   process.stderr.isTTY = false
   bar.template[0].length = 6
