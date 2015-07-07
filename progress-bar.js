@@ -11,7 +11,7 @@ function isTTY() {
   return process.stderr.isTTY
 }
 function getWritableTTYColumns() {
-  // One less than the actual as writing to the final column wraps the line
+  // Writing to the final column wraps the line
   // We have to use stdout here, because Node's magic SIGWINCH handler only
   // updates process.stdout, not process.stderr
   return process.stdout.columns - 1
