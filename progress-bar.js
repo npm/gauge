@@ -52,8 +52,8 @@ var ProgressBar = module.exports = function (options, cursor) {
 ProgressBar.prototype = {}
 
 ProgressBar.unicode = {
-  startgroup: "╢",
-  endgroup: "╟",
+  startgroup: "",
+  endgroup: "",
   complete: "█",
   incomplete: "░",
   spinner: "▀▐▄▌",
