@@ -101,8 +101,8 @@ Theme objects have the follow properties:
 
 | Property   | Unicode | ASCII |
 | ---------- | ------- | ----- |
-| startgroup | ╢       | \|    |
-| endgroup   | ╟       | \|    |
+| startgroup |         | \|    |
+| endgroup   |         | \|    |
 | complete   | █       | #     |
 | incomplete | ░       | -     |
 | spinner    | ▀▐▄▌    | -\\\|/ |
