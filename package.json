@@ -24,7 +24,7 @@
   "dependencies": {
     "ansi": "^0.3.0",
     "has-unicode": "^2.0.0",
-    "lodash.pad": "^3.0.0",
+    "lodash.pad": "^3.2.1",
     "lodash.padleft": "^3.0.0",
     "lodash.padright": "^3.0.0"
   },
