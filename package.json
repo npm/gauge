@@ -29,6 +29,6 @@
     "lodash.padright": "^3.0.0"
   },
   "devDependencies": {
-    "tap": "^0.4.13"
+    "tap": "^5.4.4"
   }
 }
