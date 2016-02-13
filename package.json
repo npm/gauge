@@ -25,9 +25,8 @@
     "ansi": "^0.3.0",
     "has-unicode": "^2.0.0",
     "lodash.pad": "^4.1.0",
-    "lodash.padleft": "^3.0.0",
-    "lodash.padright": "^3.0.0",
-    "through2": "^2.0.1"
+    "lodash.padend": "^4.1.0",
+    "lodash.padstart": "^4.1.0"
   },
   "devDependencies": {
     "tap": "^5.6.0"
