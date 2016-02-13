@@ -24,9 +24,9 @@
   "dependencies": {
     "ansi": "^0.3.0",
     "has-unicode": "^2.0.0",
-    "lodash.pad": "^3.0.0",
-    "lodash.padleft": "^3.0.0",
-    "lodash.padright": "^3.0.0"
+    "lodash.pad": "^3.3.0",
+    "lodash.padend": "^4.1.0",
+    "lodash.padstart": "^4.1.0"
   },
   "devDependencies": {
     "tap": "^0.4.13"
