@@ -30,6 +30,6 @@
     "through2": "^2.0.1"
   },
   "devDependencies": {
-    "tap": "^5.2.0"
+    "tap": "^5.6.0"
   }
 }
