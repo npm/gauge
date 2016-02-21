@@ -84,6 +84,10 @@ optional:
 * **Plumbing**: The class to use to actually generate the gauge for
   printing.  This defaults to `require('gauge/plumbing')` and ordinarly you
   shouldn't need to override this.
+* **cleanupOnExit**: Defaults to true. Ordinarily we register an exit
+  handler to make sure your cursor is turned back on and the progress bar
+  erased when your process exits, even if you Ctrl-C out or otherwise exit
+  unexpectedly. You can disable this and it won't register the exit handler.
 
 [has-unicode]: https://www.npmjs.com/package/has-unicode
 [themes]: #themes
