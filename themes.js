@@ -43,7 +43,7 @@ themes.fallback.noUnicode.noColor = newTheme({
     remaining: '-'
   },
   activityIndicatorTheme: '-\\|/',
-  preSubsection: '/'
+  preSubsection: '>'
 })
 
 themes.fallback.noUnicode.hasColor = newTheme(themes.fallback.noUnicode.noColor, {
@@ -65,7 +65,6 @@ themes.darwin.hasUnicode = {}
 themes.darwin.hasUnicode.noColor = newTheme({
   preProgressbar: '«',
   postProgressbar: '»',
-  preSubsection: '⁄',
   progressbarTheme: {
     complete: '░',
     remaining: '-'
