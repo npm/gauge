@@ -66,8 +66,9 @@ optional:
   your combination of OS, color and unicode support.  In practice this means
   that Windows always gets ASCII by default, Mac almost always gets unicode,
   and everyone almost always gets color.  Unicode is detected with
-  [has-unicode] and color is detected with [has-color].  Theme selection is
-  done by the internal [themes] module, which you can use directly.
+  [has-unicode] and color is detected by checking platform and TERM env var.
+  Theme selection is done by the internal [themes] module, which you can use
+  directly.
 * **template**: Describes what you want your gauge to look like.  The
   default is what npm uses.  Detailed [documentation] is later in this
   document.
@@ -85,7 +86,6 @@ optional:
   shouldn't need to override this.
 
 [has-unicode]: https://www.npmjs.com/package/has-unicode
-[has-color]: https://www.npmjs.com/package/has-color
 [themes]: #themes
 [documentation]: #templates
 

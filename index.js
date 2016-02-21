@@ -2,7 +2,7 @@
 var validate = require('aproba')
 var Plumbing = require('./plumbing.js')
 var hasUnicode = require('has-unicode')
-var hasColor = require('has-color')
+var hasColor = require('./has-color.js')
 var onExit = require('signal-exit')
 var themes = require('./themes')
 
