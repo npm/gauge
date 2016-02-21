@@ -84,7 +84,7 @@ test('show & pulse: fixedframerate', function (t) {
   gauge.show('NAME', 0.1)
   results.once('called:show', checkBasicShow)
   function checkBasicShow (args) {
-    t.isDeeply(args, [{ spun: 0, section: 'NAME', completed: 0.1 }], 'check basic show')
+    t.isDeeply(args, [{ spun: 0, section: 'NAME', subsection: '', completed: 0.1 }], 'check basic show')
 
     gauge.show('S')
     gauge.pulse()
@@ -92,7 +92,7 @@ test('show & pulse: fixedframerate', function (t) {
   }
   function checkPulse (args) {
     t.isDeeply(args, [
-      { spun: 1, section: 'S', subsection: undefined, completed: 0.1 }
+      { spun: 1, section: 'S', subsection: '', completed: 0.1 }
     ], 'check pulse')
 
     gauge.pulse('P')
@@ -127,6 +127,7 @@ test('window resizing', function (t) {
   results.once('called:show', function (args) {
     t.isDeeply(args, [{
       section: 'NAME',
+      subsection: '',
       completed: 0.1,
       spun: 0
     }])
@@ -144,6 +145,7 @@ test('window resizing', function (t) {
   function lookForShow (args) {
     t.isDeeply(args, [{
       section: 'NAME',
+      subsection: '',
       completed: 0.5,
       spun: 0
     }])

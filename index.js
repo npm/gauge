@@ -19,7 +19,9 @@ function Gauge (writeTo, options) {
   validate('OO', [writeTo, options])
 
   this.status = {
-    spun: 0
+    spun: 0,
+    section: '',
+    subsection: ''
   }
   this._showing = false
   this._onScreen = false
@@ -118,7 +120,7 @@ Gauge.prototype.show = function (section, completed) {
 Gauge.prototype.pulse = function (subsection) {
   if (this.disabled) return
   if (!this._showing) return
-  this.status.subsection = subsection
+  this.status.subsection = subsection || ''
   this.status.spun ++
   this._needsRedraw = true
   if (!this.fixedFramerate) this._doRedraw()
