@@ -52,7 +52,7 @@ themes.fallback.noUnicode.hasColor = newTheme(themes.fallback.noUnicode.noColor,
     complete: ' ',
     postComplete: consoleStrings.color('stopInverse'),
     preRemaining: consoleStrings.color('brightBlack'),
-    remaining: '░',
+    remaining: '.',
     postRemaining: consoleStrings.color('reset')
   }
 })
