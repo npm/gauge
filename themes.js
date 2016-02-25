@@ -40,7 +40,7 @@ themes.fallback.noUnicode.noColor = newTheme({
   postProgressbar: ']',
   progressbarTheme: {
     complete: '#',
-    remaining: '-'
+    remaining: '.'
   },
   activityIndicatorTheme: '-\\|/',
   preSubsection: '>'
@@ -63,13 +63,13 @@ themes.darwin = {}
 themes.darwin.noUnicode = themes.fallback.noUnicode
 themes.darwin.hasUnicode = {}
 themes.darwin.hasUnicode.noColor = newTheme({
-  preProgressbar: '«',
-  postProgressbar: '»',
+  preProgressbar: '⸨',
+  postProgressbar: '⸩',
   progressbarTheme: {
     complete: '░',
-    remaining: '-'
+    remaining: '⠂'
   },
-  activityIndicatorTheme: '◷◶◵◴'
+  activityIndicatorTheme: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
 })
 
 themes.darwin.hasUnicode.hasColor = newTheme(themes.darwin.hasUnicode.noColor, {
