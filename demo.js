@@ -22,6 +22,8 @@ nextBar()
 function nextBar () {
   var info = themes.shift()
 
+  console.log('Demoing output for ' + info[0])
+
   var gt = new Gauge(process.stderr, {
     updateInterval: 50,
     theme: info[1],
@@ -34,7 +36,7 @@ function nextBar () {
   var cnt = 0
   var pulse = setInterval(function () {
     gt.pulse('this is a thing that happened ' + (++cnt))
-  }, 10)
+  }, 110)
   var prog = setInterval(function () {
     progress += 0.04
     gt.show(info[0] + ':' + Math.round(progress * 1000), progress)
