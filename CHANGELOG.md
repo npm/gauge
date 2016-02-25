@@ -1,3 +1,25 @@
+### v2.1.0
+
+* Got rid of ░ in the default platform, noUnicode, hasColor theme.  Thanks
+  to @yongtw123 for pointing out this had snuck in.
+* Fiddled with the demo output to make it easier to see the spinner spin. Also
+  added prints before each platforms test output.
+* I forgot to include `signal-exit` in our deps.  <.< Thank you @KenanY for
+  finding this. Then I was lazy and made a new commit instead of using his
+  PR. Again, thank you for your patience @KenenY.
+* Drastically speed up travis testing.
+* Add a small javascript demo (demo.js) for showing off the various themes
+  (and testing them on diff platforms).
+* Change: The subsection separator from ⁄ and / (different chars) to >.
+* Fix crasher: A show or pulse without a label would cause the template renderer
+  to complain about a missing value.
+* New feature: Add the ability to disable the clean-up-on-exit behavior.
+  Not something I expect to be widely desirable, but important if you have
+  multiple distinct gauge instances in your app.
+* Use our own color support detection.
+  The `has-color` module proved too magic for my needs, making assumptions
+  as to which stream we write to and reading command line arguments.
+
 ### v2.0.0
 
 This is a major rewrite of the internals.  Externally there are fewer
