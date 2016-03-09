@@ -45,6 +45,10 @@ exports.goto = function (x, y) {
   return prefix + y + ';' + x + 'H'
 }
 
+exports.gotoSOL = function () {
+  return '\r'
+}
+
 exports.hideCursor = function hideCursor () {
   return prefix + '?25l'
 }

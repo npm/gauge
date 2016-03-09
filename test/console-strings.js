@@ -40,5 +40,6 @@ test('consoleStrings', function (t) {
     t.pass('set invalid color')
   }
   t.is(consoleStrings.goto(10, 3), '\x1b[3;10H', 'absolute position')
+  t.is(consoleStrings.gotoSOL(), '\r', 'goto start of line')
   t.done()
 })

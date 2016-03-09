@@ -29,7 +29,7 @@ Plumbing.prototype.setWidth = function (width) {
 }
 
 Plumbing.prototype.hide = function () {
-  return '\r' + consoleStrings.eraseLine()
+  return consoleStrings.gotoSOL() + consoleStrings.eraseLine()
 }
 
 Plumbing.prototype.hideCursor = consoleStrings.hideCursor
@@ -41,5 +41,5 @@ Plumbing.prototype.show = function (status) {
   Object.keys(status).forEach(function (key) { values[key] = status[key] })
 
   return renderTemplate(this.width, this.template, values) +
-         consoleStrings.eraseLine() + '\r'
+         consoleStrings.eraseLine() + consoleStrings.gotoSOL()
 }
