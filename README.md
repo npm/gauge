@@ -62,13 +62,15 @@ optional:
   so it would stop your program from exiting– if you want to use this
   feature with 0.8 just make sure you call `gauge.disable()` before you
   expect your program to exit.
-* **theme**: The theme to use as output.  Defaults to something usable on
-  your combination of OS, color and unicode support.  In practice this means
-  that Windows always gets ASCII by default, Mac almost always gets unicode,
-  and everyone almost always gets color.  Unicode is detected with
-  [has-unicode] and color is detected by checking platform and TERM env var.
-  Theme selection is done by the internal [themes] module, which you can use
-  directly.
+* **themes**: A themeset to use when selecting the theme to use. Defaults
+  to `gauge/themes`, see the [themes] documentation for details.
+* **theme**: Alternatively you can specificy a specific theme to use. If you
+  use this, there's no reason to use **themes**.
+
+  The default theme is selected using **themes** to something usable on your
+  combination of OS, color and unicode support.  Unicode support is detected
+  with [has-unicode] and color is detected by checking platform and TERM env
+  var.
 * **template**: Describes what you want your gauge to look like.  The
   default is what npm uses.  Detailed [documentation] is later in this
   document.
@@ -145,37 +147,82 @@ progress bar interface.
 ### THEMES
 
 ```
-var theme = require('gauge/themes')
+var themes = require('gauge/themes')
 
 // fetch the default color unicode theme for this platform
-var ourTheme = theme({hasUnicode: true, hasColor: true})
+var ourTheme = themes({hasUnicode: true, hasColor: true})
 
 // fetch the default non-color unicode theme for osx
-var ourTheme = theme({hasUnicode: true, hasColor: false, platform: 'darwin'})
+var ourTheme = themes({hasUnicode: true, hasColor: false, platform: 'darwin'})
 
 // create a new theme based on the color ascii theme for this platform
 // that brackets the progress bar with arrows
-var ourTheme = theme.newTheme(theme(hasUnicode: false, hasColor: true}), {
+var ourTheme = themes.newTheme(theme(hasUnicode: false, hasColor: true}), {
   preProgressbar: '→',
   postProgressbar: '←'
 })
 ```
 
-#### theme(opts)
+The object returned by `gauge/themes` is an instance of the `ThemeSet` class.
 
-Fetches a theme object based on platform settings.
+```
+var ThemeSet = require('gauge/theme-set')
+var themes = new ThemeSet()
+```
+
+#### themes(opts)
+#### themes.getDefault(opts)
+
+Theme objects are a function that fetches the default theme based on
+platform, unicode and color support.
 
 Options is an object with the following properties:
 
-* **hasUnicode** - If true, fetch a unicode theme.
-* **hasColor** - If true, fetch a color theme.
-* **platform** (optional) - Defaults to `process.platform`. The platform code of the theme we want.
+* **hasUnicode** - If true, fetch a unicode theme, if no unicode theme is
+  available then a non-unicode theme will be used.
+* **hasColor** - If true, fetch a color theme, if no color theme is
+  available a non-color theme will be used.
+* **platform** (optional) - Defaults to `process.platform`.  If no
+  platform match is available then `fallback` is used instead.
 
-#### theme.newTheme([parent,] newTheme)
+If no compatible theme can be found then an error will be thrown with a
+`code` of `EMISSINGTHEME`.
 
-Create a new theme object based on `parent`.  If no `parent` is provided
-then a minimal parent that defines functions for rendering the activity
-indicator (spinner) and progress bar will be defined.
+#### themes.addTheme(themeName, themeObj)
+#### themes.addTheme(themeName, [parentTheme], newTheme)
+
+Adds a named theme to the themeset.  You can pass in either a theme object,
+as returned by `themes.newTheme` or the arguments you'd pass to
+`themes.newTheme`.
+
+#### themes.getTheme(name)
+
+Returns the theme object from this theme set named `name`.
+
+If `name` does not exist in this themeset an error will be thrown with
+a `code` of `EMISSINGTHEME`.
+
+#### themes.setDefault([opts], themeName)
+
+`opts` is an object with the following properties.
+
+* **platform** - Defaults to `'fallback'`.  If your theme is platform
+  specific, specify that here with the platform from `process.platform`, eg,
+  `win32`, `darwin`, etc.
+* **hasUnicode** - Defaults to `false`. If your theme uses unicode you
+  should set this to true.
+* **hasColor** - Defaults to `false`.  If your theme uses color you should
+  set this to true.
+
+`themeName` is the name of the theme (as given to `addTheme`) to use for
+this set of `opts`.
+
+#### themes.newTheme([parentTheme,] newTheme)
+
+Create a new theme object based on `parentTheme`.  If no `parentTheme` is
+provided then a minimal parentTheme that defines functions for rendering the
+activity indicator (spinner) and progress bar will be defined. (This
+fallback parent is defined in `gauge/base-theme`.)
 
 newTheme should be a bare object– we'll start by discussing the properties
 defined by the default themes:

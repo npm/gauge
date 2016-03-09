@@ -4,7 +4,7 @@ var Plumbing = require('./plumbing.js')
 var hasUnicode = require('has-unicode')
 var hasColor = require('./has-color.js')
 var onExit = require('signal-exit')
-var themes = require('./themes')
+var defaultThemes = require('./themes')
 
 module.exports = Gauge
 
@@ -37,6 +37,7 @@ function Gauge (writeTo, options) {
     (writeTo === process.stderr && process.stdout.isTTY && process.stdout) ||
     (writeTo.isTTY && writeTo)
 
+  var themes = options.themes || defaultThemes
   var theme = options.theme || themes({hasUnicode: hasUnicode(), hasColor: hasColor})
   var template = options.template || [
     {type: 'progressbar', length: 20},

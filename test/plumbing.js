@@ -11,7 +11,7 @@ var stripInvisible = function (str) {
 var template = [
   {type: 'name'}
 ]
-var plumbing = new Plumbing(themes.fallback.noUnicode.noColor, template, 10)
+var plumbing = new Plumbing(themes.getTheme('ASCII'), template, 10)
 
 // These three produce fixed strings and are entirely static, so as long as
 // they produce _something_ they're probably ok. Actually testing them will

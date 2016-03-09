@@ -1,41 +1,10 @@
 'use strict'
-var validate = require('aproba')
-var objectAssign = require('object-assign')
 var consoleStrings = require('./console-strings')
-var spin = require('./spin.js')
-var progressBar = require('./progress-bar.js')
+var ThemeSet = require('./theme-set.js')
 
-var themes = module.exports = function (opts) {
-  if (!opts) opts = {}
-  var os = themes[opts.platform || process.platform] || themes.fallback
-  var unicode = opts.hasUnicode ? os.hasUnicode : os.noUnicode
-  var color = opts.hasColor ? unicode.hasColor : unicode.noColor
-  return color
-}
+var themes = module.exports = new ThemeSet()
 
-var baseTheme = {
-  activityIndicator: function (values, theme, width) {
-    if (values.spun == null) return
-    return spin(theme, values.spun)
-  },
-  progressbar: function (values, theme, width) {
-    if (values.completed == null) return
-    return progressBar(theme, width, values.completed)
-  }
-}
-
-var newTheme = themes.newTheme = function (parent, theme) {
-  if (!theme) {
-    theme = parent
-    parent = baseTheme
-  }
-  validate('OO', [parent, theme])
-  return objectAssign({}, parent, theme)
-}
-
-themes.fallback = {}
-themes.fallback.noUnicode = {}
-themes.fallback.noUnicode.noColor = newTheme({
+themes.addTheme('ASCII', {
   preProgressbar: '[',
   postProgressbar: ']',
   progressbarTheme: {
@@ -46,7 +15,7 @@ themes.fallback.noUnicode.noColor = newTheme({
   preSubsection: '>'
 })
 
-themes.fallback.noUnicode.hasColor = newTheme(themes.fallback.noUnicode.noColor, {
+themes.addTheme('colorASCII', themes.getTheme('ASCII'), {
   progressbarTheme: {
     preComplete: consoleStrings.color('inverse'),
     complete: ' ',
@@ -57,12 +26,7 @@ themes.fallback.noUnicode.hasColor = newTheme(themes.fallback.noUnicode.noColor,
   }
 })
 
-themes.fallback.hasUnicode = themes.fallback.noUnicode
-
-themes.darwin = {}
-themes.darwin.noUnicode = themes.fallback.noUnicode
-themes.darwin.hasUnicode = {}
-themes.darwin.hasUnicode.noColor = newTheme({
+themes.addTheme('brailleSpinner', {
   preProgressbar: '⸨',
   postProgressbar: '⸩',
   progressbarTheme: {
@@ -72,7 +36,7 @@ themes.darwin.hasUnicode.noColor = newTheme({
   activityIndicatorTheme: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
 })
 
-themes.darwin.hasUnicode.hasColor = newTheme(themes.darwin.hasUnicode.noColor, {
+themes.addTheme('colorBrailleSpinner', themes.getTheme('brailleSpinner'), {
   progressbarTheme: {
     preComplete: consoleStrings.color('inverse'),
     complete: ' ',
@@ -82,3 +46,8 @@ themes.darwin.hasUnicode.hasColor = newTheme(themes.darwin.hasUnicode.noColor, {
     postRemaining: consoleStrings.color('reset')
   }
 })
+
+themes.setDefault({}, 'ASCII')
+themes.setDefault({hasColor: true}, 'colorASCII')
+themes.setDefault({platform: 'darwin', hasUnicode: true}, 'brailleSpinner')
+themes.setDefault({platform: 'darwin', hasUnicode: true, hasColor: true}, 'colorBrailleSpinner')
