@@ -57,17 +57,17 @@ TemplateItem.prototype.getBaseLength = function () {
 
 TemplateItem.prototype.getLength = function () {
   var length = this.getBaseLength()
-  if (length == null) return
+  if (length == null) return null
   return length + this.padLeft + this.padRight
 }
 
 TemplateItem.prototype.getMaxLength = function () {
-  if (this.maxLength == null) return
+  if (this.maxLength == null) return null
   return this.maxLength + this.padLeft + this.padRight
 }
 
 TemplateItem.prototype.getMinLength = function () {
-  if (this.minLength == null) return
+  if (this.minLength == null) return null
   return this.minLength + this.padLeft + this.padRight
 }
 
