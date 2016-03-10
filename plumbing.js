@@ -38,7 +38,9 @@ Plumbing.prototype.showCursor = consoleStrings.showCursor
 
 Plumbing.prototype.show = function (status) {
   var values = Object.create(this.theme)
-  Object.keys(status).forEach(function (key) { values[key] = status[key] })
+  for (var key in status) {
+    values[key] = status[key]
+  }
 
   return renderTemplate(this.width, this.template, values) +
          consoleStrings.eraseLine() + consoleStrings.gotoSOL()
