@@ -78,5 +78,8 @@ test('renderTemplate', function (t) {
   result = renderTemplate(10, [{value: 'abc'}, {value: '‼‼', length: 0}, {value: 'def'}])
   t.is(result, 'abcdef    ', 'post values')
 
+  result = renderTemplate(10, [{value: 'abc', align: 'xyzzy'}])
+  t.is(result, 'abc       ', 'unknown aligns are align left')
+
   t.end()
 })
