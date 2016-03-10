@@ -168,6 +168,9 @@ The object returned by `gauge/themes` is an instance of the `ThemeSet` class.
 ```
 var ThemeSet = require('gauge/theme-set')
 var themes = new ThemeSet()
+// or
+var themes = require('gauge/themes')
+var mythemes = themes.newThemeset() // creates a new themeset based on the default themes
 ```
 
 #### themes(opts)
@@ -259,6 +262,11 @@ There are a couple of special prefixes:
 And one special suffix:
 
 * **Theme** - Its value is passed to a function-type item as the theme.
+
+#### themes.newThemeset()
+
+Copy the current themeset into a new one.  This allows you to easily inherit
+one themeset from another.
 
 ### TEMPLATES
 

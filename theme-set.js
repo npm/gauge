@@ -93,6 +93,9 @@ ThemeSetProto.newThemeSet = function () {
   var themeset = function (opts) {
     return themeset.getDefault(opts)
   }
-  return objectAssign(themeset, ThemeSetProto, {themes: {}, defaults: {}})
+  return objectAssign(themeset, ThemeSetProto, {
+    themes: objectAssign({}, this.themes),
+    defaults: JSON.parse(JSON.stringify(this.defaults || {}))
+  })
 }
 
