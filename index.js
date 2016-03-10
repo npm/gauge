@@ -54,7 +54,7 @@ function Gauge (writeTo, options) {
   this._$$doRedraw = callWith(this, this._doRedraw)
   this._$$handleSizeChange = callWith(this, this._handleSizeChange)
 
-  if (options.cleanupOnExit == null || options.cealnupOnExit) {
+  if (options.cleanupOnExit == null || options.cleanupOnExit) {
     onExit(callWith(this, this.disable))
   }
 
