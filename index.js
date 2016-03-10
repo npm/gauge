@@ -5,6 +5,8 @@ var hasUnicode = require('has-unicode')
 var hasColor = require('./has-color.js')
 var onExit = require('signal-exit')
 var defaultThemes = require('./themes')
+var setInterval = require('./set-interval.js')
+var process = require('./process.js')
 
 module.exports = Gauge
 
