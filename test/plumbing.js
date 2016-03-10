@@ -40,3 +40,27 @@ test('show', function (t) {
   t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test"}ERASECR')
   t.end()
 })
+
+test('width', function (t) {
+  var plumbing = new Plumbing(theme, template)
+  t.is(plumbing.show({name: 'test'}), 'w:80, t:[{"type":"name"}], v:{"name":"test"}ERASECR')
+  t.end()
+})
+
+test('setTheme', function (t) {
+  plumbing.setTheme({x: 'abc'})
+  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.end()
+})
+
+test('setTemplate', function (t) {
+  plumbing.setTemplate([{type: 'name'}, {type: 'x'}])
+  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.end()
+})
+
+test('setWidth', function (t) {
+  plumbing.setWidth(20)
+  t.is(plumbing.show({name: 'test'}), 'w:20, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.end()
+})
