@@ -154,3 +154,43 @@ test('window resizing', function (t) {
     t.done()
   }
 })
+
+/* todo missing:
+
+constructor with hideCursor value
+
+  writeTo: process.stderr & process.stdout IS A TTY (or isn't)
+  cleanupOnExit: explicitly set to true
+
+disable while showing then enable
+
+enable while fixedFramerate is false
+
+enable while fixedFramerate is true & redrawTracker.unref is false (0.8)
+
+disable while fixedFramerate is false
+
+hide()
+
+show() while disabled
+
+show() with object args
+
+show() with neither string nor object (undefined? number?)
+
+show() with fixedFramerate == false
+
+pulse() while disabled
+pulse while _showing == false
+pulse where fixedFramerate == false
+
+implicit:
+  _doRedraw will get called with fixedFramerate = false if we test the above
+  trigger a show + redraw with hideCursor = true
+  trigger a hide + redraw with hideCursor = true
+
+trigger a _doRedraw when _needsRedraw is false
+
+TEST BACKPRESSURE
+
+*/
