@@ -30,3 +30,4 @@ node_modules
 # Editor cruft
 *~
 .#*
+.nyc_output
