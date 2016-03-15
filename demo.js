@@ -1,21 +1,15 @@
 var Gauge = require('./')
-var theme = require('./themes.js')
+var gaugeDefault = require('./themes.js')
 var onExit = require('signal-exit')
-
-var themes = []
-;['darwin', 'linux', 'win32'].forEach(function (os) {
-  themes.push(
-    [os + ' unicode & color', theme({platform: os, hasUnicode: true, hasColor: true})],
-    [os + ' unicode & nocolor', theme({platform: os, hasUnicode: true, hasColor: false})],
-    [os + ' nounicode & color', theme({platform: os, hasUnicode: false, hasColor: true})],
-    [os + ' nounicode & nocolor', theme({platform: os, hasUnicode: false, hasColor: false})]
-  )
-})
 
 var activeGauge
 
 onExit(function () {
   activeGauge.disable()
+})
+
+var themes = Object.keys(gaugeDefault.themes).map(function (key) {
+  return [key, gaugeDefault.themes[key]]
 })
 
 nextBar()
