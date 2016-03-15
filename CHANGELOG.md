@@ -1,3 +1,7 @@
+### v2.2.1
+
+* Fix image in readme
+
 ### v2.2.0
 
 * All new themes API– reference themes by name and pass in custom themes and
