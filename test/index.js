@@ -3,7 +3,7 @@ var test = require('tap').test
 var Gauge = require('../index')
 var stream = require('readable-stream')
 var util = require('util')
-var EventEmitter = require('event-emitter')
+var EventEmitter = require('events')
 
 function Sink () {
   stream.Writable.call(this, arguments)
@@ -23,6 +23,7 @@ MockPlumbing.prototype = {}
 function RecordCall (name) {
   return function () {
     var args = Array.prototype.slice.call(arguments)
+    results.emit('called', [name, args])
     results.emit('called:' + name, args)
     return ''
   }
@@ -57,12 +58,15 @@ test('construct', function (t) {
     Plumbing: MockPlumbing,
     theme: 'THEME',
     template: 'TEMPLATE',
-    enabled: false
+    enabled: false,
+    updateInterval: 0,
+    fixedFramerate: false
   })
   t.ok(gauge)
   t.is(results.columns, 15, 'width passed through')
   t.is(results.theme, 'THEME', 'theme passed through')
   t.is(results.template, 'TEMPLATE', 'template passed through')
+
   t.done()
 })
 
@@ -155,9 +159,82 @@ test('window resizing', function (t) {
   }
 })
 
+function collectResults (time, cb) {
+  var collected = []
+  function collect (called) {
+    collected.push(called)
+  }
+  results.on('called', collect)
+  setTimeout(function () {
+    results.removeListener('called', collect)
+    cb(collected)
+  }, time)
+}
+
+test('hideCursor:true', function (t) {
+  var output = new Sink()
+  output.isTTY = true
+  output.columns = 16
+  var gauge = new Gauge(output, {
+    Plumbing: MockPlumbing,
+    theme: 'THEME',
+    template: 'TEMPLATE',
+    enabled: true,
+    updateInterval: 10,
+    fixedFramerate: true,
+    hideCursor: true
+  })
+  collectResults(11, andCursorHidden)
+  gauge.show('NAME', 0.5)
+  function andCursorHidden (got) {
+    var expected = [
+      ['hideCursor', []],
+      ['show', [{
+        spun: 0,
+        section: 'NAME',
+        subsection: '',
+        completed: 0.5
+      }]]
+    ]
+    t.isDeeply(got, expected, 'hideCursor')
+    gauge.disable()
+    t.end()
+  }
+})
+
+test('hideCursor:false', function (t) {
+  var output = new Sink()
+  output.isTTY = true
+  output.columns = 16
+  var gauge = new Gauge(output, {
+    Plumbing: MockPlumbing,
+    theme: 'THEME',
+    template: 'TEMPLATE',
+    enabled: true,
+    updateInterval: 10,
+    fixedFramerate: true,
+    hideCursor: false
+  })
+  collectResults(11, andCursorHidden)
+  gauge.show('NAME', 0.5)
+  function andCursorHidden (got) {
+    var expected = [
+      ['show', [{
+        spun: 0,
+        section: 'NAME',
+        subsection: '',
+        completed: 0.5
+      }]]
+    ]
+    t.isDeeply(got, expected, 'do not hideCursor')
+    gauge.disable()
+    t.end()
+  }
+})
+
 /* todo missing:
 
-constructor with hideCursor value
+constructor
 
   writeTo: process.stderr & process.stdout IS A TTY (or isn't)
   cleanupOnExit: explicitly set to true
