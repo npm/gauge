@@ -1,3 +1,11 @@
+### v2.2.0
+
+* All new themes API– reference themes by name and pass in custom themes and
+  themesets (themesets get platform support autodetection done on them to
+  select the best theme).  Theme mixins let you add features to all existing
+  themes.
+* Much, much improved test coverage.
+
 ### v2.1.0
 
 * Got rid of ░ in the default platform, noUnicode, hasColor theme.  Thanks
