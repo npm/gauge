@@ -263,6 +263,12 @@ And one special suffix:
 
 * **Theme** - Its value is passed to a function-type item as the theme.
 
+#### themes.addToAllThemes(theme)
+
+This *mixes-in* `theme` into all themes currently defined. It also adds it
+to the default parent theme for this themeset, so future themes added to
+this themeset will get the values from `theme` by default.
+
 #### themes.newThemeset()
 
 Copy the current themeset into a new one.  This allows you to easily inherit

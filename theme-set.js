@@ -1,6 +1,5 @@
 'use strict'
 var objectAssign = require('object-assign')
-var baseTheme = require('./base-theme.js')
 
 module.exports = function () {
   return ThemeSetProto.newThemeSet()
@@ -8,16 +7,26 @@ module.exports = function () {
 
 var ThemeSetProto = {}
 
+ThemeSetProto.baseTheme = require('./base-theme.js')
+
 ThemeSetProto.newTheme = function (parent, theme) {
   if (!theme) {
     theme = parent
-    parent = baseTheme
+    parent = this.baseTheme
   }
   return objectAssign({}, parent, theme)
 }
 
 ThemeSetProto.addTheme = function (name, parent, theme) {
   this.themes[name] = this.newTheme(parent, theme)
+}
+
+ThemeSetProto.addToAllThemes = function (theme) {
+  var themes = this.themes
+  Object.keys(themes).forEach(function (name) {
+    objectAssign(themes[name], theme)
+  })
+  objectAssign(this.baseTheme, theme)
 }
 
 ThemeSetProto.getTheme = function (name) {
@@ -95,6 +104,7 @@ ThemeSetProto.newThemeSet = function () {
   }
   return objectAssign(themeset, ThemeSetProto, {
     themes: objectAssign({}, this.themes),
+    baseTheme: objectAssign({}, this.baseTheme),
     defaults: JSON.parse(JSON.stringify(this.defaults || {}))
   })
 }

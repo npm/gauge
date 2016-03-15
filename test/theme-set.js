@@ -3,26 +3,22 @@ var test = require('tap').test
 var ThemeSet = require('../theme-set.js')
 
 var themes = new ThemeSet()
+themes.addTheme('fallback', {id: 0})
+themes.addTheme('test1', {id: 1})
+themes.addTheme('test2', {id: 2})
+themes.addTheme('test3', {id: 3})
+themes.addTheme('test4', {id: 4})
+themes.addTheme('testz', themes.getTheme('fallback'), {id: 'z'})
+themes.setDefault('fallback')
+themes.setDefault({platform: 'aa', hasUnicode: false, hasColor: false}, 'test1')
+themes.setDefault({platform: 'bb', hasUnicode: true, hasColor: true}, 'test2')
+themes.setDefault({platform: 'ab', hasUnicode: false, hasColor: true}, 'test3')
+themes.setDefault({platform: 'ba', hasUnicode: true, hasColor: false}, 'test4')
 
-test('setup', function (t) {
-  themes.addTheme('fallback', {id: 0})
-  themes.addTheme('test1', {id: 1})
-  themes.addTheme('test2', {id: 2})
-  themes.addTheme('test3', {id: 3})
-  themes.addTheme('test4', {id: 4})
-  themes.addTheme('testz', themes.getTheme('fallback'), {id: 'z'})
-  themes.setDefault('fallback')
-  themes.setDefault({platform: 'aa', hasUnicode: false, hasColor: false}, 'test1')
-  themes.setDefault({platform: 'bb', hasUnicode: true, hasColor: true}, 'test2')
-  themes.setDefault({platform: 'ab', hasUnicode: false, hasColor: true}, 'test3')
-  themes.setDefault({platform: 'ba', hasUnicode: true, hasColor: false}, 'test4')
-
-  themes.setDefault({platform: 'zz', hasUnicode: false, hasColor: false}, 'test1')
-  themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: true}, 'test2')
-  themes.setDefault({platform: 'zz', hasUnicode: false, hasColor: true}, 'test3')
-  themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: false}, 'test4')
-  t.done()
-})
+themes.setDefault({platform: 'zz', hasUnicode: false, hasColor: false}, 'test1')
+themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: true}, 'test2')
+themes.setDefault({platform: 'zz', hasUnicode: false, hasColor: true}, 'test3')
+themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: false}, 'test4')
 
 test('themeset', function (t) {
   t.is(themes().id, 0, 'fallback')
@@ -80,3 +76,13 @@ test('themeset', function (t) {
   t.done()
 })
 
+test('add-to-all', function (t) {
+  themes.addToAllThemes({
+    'xyz': 17
+  })
+  t.is(themes.getTheme('test1').xyz, 17, 'existing themes updated')
+  var newTheme = themes.newTheme({id: 99})
+  t.is(newTheme.id, 99, 'new theme initialized')
+  t.is(newTheme.xyz, 17, 'new theme got extension')
+  t.done()
+})
