@@ -15,7 +15,7 @@ gauge.pulse("this")
 gauge.hide()
 ```
 
-![](example.png)
+![](gauge-demo.gif)
 
 
 ### CHANGES FROM 1.x
