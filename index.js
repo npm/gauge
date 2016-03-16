@@ -41,6 +41,7 @@ function Gauge (writeTo, options) {
 
   var themes = options.themes || defaultThemes
   var theme = options.theme || themes({hasUnicode: hasUnicode(), hasColor: hasColor})
+  if (typeof theme === 'string') theme = themes.getTheme(theme)
   var template = options.template || [
     {type: 'progressbar', length: 20},
     {type: 'activityIndicator', kerning: 1, length: 1},

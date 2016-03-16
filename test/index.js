@@ -56,16 +56,16 @@ test('construct', function (t) {
   output.columns = 16
   var gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
-    theme: 'THEME',
-    template: 'TEMPLATE',
+    theme: ['THEME'],
+    template: ['TEMPLATE'],
     enabled: false,
     updateInterval: 0,
     fixedFramerate: false
   })
   t.ok(gauge)
   t.is(results.columns, 15, 'width passed through')
-  t.is(results.theme, 'THEME', 'theme passed through')
-  t.is(results.template, 'TEMPLATE', 'template passed through')
+  t.same(results.theme, ['THEME'], 'theme passed through')
+  t.same(results.template, ['TEMPLATE'], 'template passed through')
 
   t.done()
 })
@@ -177,8 +177,8 @@ test('hideCursor:true', function (t) {
   output.columns = 16
   var gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
-    theme: 'THEME',
-    template: 'TEMPLATE',
+    theme: ['THEME'],
+    template: ['TEMPLATE'],
     enabled: true,
     updateInterval: 10,
     fixedFramerate: true,
@@ -208,8 +208,8 @@ test('hideCursor:false', function (t) {
   output.columns = 16
   var gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
-    theme: 'THEME',
-    template: 'TEMPLATE',
+    theme: ['THEME'],
+    template: ['TEMPLATE'],
     enabled: true,
     updateInterval: 10,
     fixedFramerate: true,

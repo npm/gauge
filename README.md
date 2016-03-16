@@ -64,13 +64,12 @@ optional:
   expect your program to exit.
 * **themes**: A themeset to use when selecting the theme to use. Defaults
   to `gauge/themes`, see the [themes] documentation for details.
-* **theme**: Alternatively you can specificy a specific theme to use. If you
-  use this, there's no reason to use **themes**.
+* **theme**: Select a theme for use, it can be a:
+  * Theme object, in which case the **themes** is not used.
+  * The name of a theme, which will be looked up in the current *themes* object.
 
-  The default theme is selected using **themes** to something usable on your
-  combination of OS, color and unicode support.  Unicode support is detected
-  with [has-unicode] and color is detected by checking platform and TERM env
-  var.
+  If no theme is selected then a default is picked using a combination of our
+  best guesses at your OS, color support and unicode support.
 * **template**: Describes what you want your gauge to look like.  The
   default is what npm uses.  Detailed [documentation] is later in this
   document.
