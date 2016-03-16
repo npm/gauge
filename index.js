@@ -17,6 +17,7 @@ function callWith (obj, method) {
 }
 
 function Gauge (writeTo, options) {
+  if (!writeTo) writeTo = process.stderr
   if (!options) options = {}
   validate('OO', [writeTo, options])
 
