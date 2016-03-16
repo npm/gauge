@@ -3,7 +3,7 @@ var test = require('tap').test
 var Gauge = require('../index')
 var stream = require('readable-stream')
 var util = require('util')
-var EventEmitter = require('events')
+var EventEmitter = require('events').EventEmitter
 
 function Sink () {
   stream.Writable.call(this, arguments)
