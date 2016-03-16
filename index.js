@@ -149,6 +149,7 @@ Gauge.prototype._doRedraw = function () {
     }
     return this._writeTo.write(result)
   }
+  if (!this._showing && !this._onScreen) return
   if (this._showing && !this._onScreen) {
     this._onScreen = true
     this._needsRedraw = true
