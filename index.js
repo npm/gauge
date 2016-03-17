@@ -67,6 +67,10 @@ function Gauge (writeTo, options) {
 }
 Gauge.prototype = {}
 
+Gauge.prototype.setTemplate = function (template) {
+  this._gauge.setTemplate(template)
+}
+
 Gauge.prototype.enable = function () {
   this.disabled = false
   if (this.tty) this._enableEvents()
