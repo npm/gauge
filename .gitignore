@@ -8,3 +8,7 @@ node_modules
 # Editor cruft
 *~
 .#*
+
+# MacOS cruft
+.DS_Store
+Thumbs.db
