@@ -42,6 +42,6 @@ Plumbing.prototype.show = function (status) {
     values[key] = status[key]
   }
 
-  return renderTemplate(this.width, this.template, values) +
+  return renderTemplate(this.width, this.template, values).trim() +
          consoleStrings.eraseLine() + consoleStrings.gotoSOL()
 }
