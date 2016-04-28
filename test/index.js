@@ -35,17 +35,17 @@ function RecordCall (name) {
 
 test('defaults', function (t) {
   var gauge = new Gauge(process.stdout)
-  t.is(gauge.disabled, false, 'disabled')
-  t.is(gauge.updateInterval, 50, 'updateInterval')
+  t.is(gauge._disabled, false, 'disabled')
+  t.is(gauge._updateInterval, 50, 'updateInterval')
   if (process.stdout.isTTY) {
-    t.is(gauge.tty, process.stdout, 'tty')
+    t.is(gauge._tty, process.stdout, 'tty')
     gauge.disable()
     gauge = new Gauge(process.stderr)
-    t.is(gauge.tty, process.stdout, 'tty is stdout when writeTo is stderr')
+    t.is(gauge._tty, process.stdout, 'tty is stdout when writeTo is stderr')
   }
   gauge.disable()
   gauge = new Gauge(new Sink())
-  t.is(gauge.tty, undefined, 'non-tty stream is not tty')
+  t.is(gauge._tty, undefined, 'non-tty stream is not tty')
   gauge.disable()
   t.end()
 })

@@ -28,22 +28,23 @@ function Gauge (arg1, arg2) {
     options = arg1 || arg2 || {}
   }
 
-  this.status = {
+  this._status = {
     spun: 0,
     section: '',
     subsection: ''
   }
-  this._showing = false
-  this._onScreen = false
+  this._paused = false // are we paused for back pressure?
+  this._disabled = true // are all progress bar updates disabled?
+  this._showing = false // do we WANT the progress bar on screen
+  this._onScreen = false // IS the progress bar on screen
+  this._needsRedraw = false // should we print something at next tick?
   this._hideCursor = options.hideCursor == null ? true : options.hideCursor
-  this._needsRedraw = false
-  this.fixedFramerate = options.fixedFramerate == null
+  this._fixedFramerate = options.fixedFramerate == null
     ? !(/^v0\.8\./.test(process.version))
     : options.fixedFramerate
   this._lastUpdateAt = null
-  this.updateInterval = options.updateInterval == null ? 50 : options.updateInterval
-  this._paused = false
-  this.tty = options.tty ||
+  this._updateInterval = options.updateInterval == null ? 50 : options.updateInterval
+  this._tty = options.tty ||
     (writeTo === process.stderr && process.stdout.isTTY && process.stdout) ||
     (writeTo.isTTY && writeTo)
 
@@ -57,7 +58,7 @@ function Gauge (arg1, arg2) {
     {type: 'subsection', kerning: 1}
   ]
   var PlumbingClass = options.Plumbing || Plumbing
-  this._gauge = new PlumbingClass(theme, template, ((this.tty && this.tty.columns) || 80) - 1)
+  this._gauge = new PlumbingClass(theme, template, ((this._tty && this._tty.columns) || 80) - 1)
   this._writeTo = writeTo
 
   this._$$doRedraw = callWith(this, this._doRedraw)
@@ -80,8 +81,8 @@ Gauge.prototype.setTemplate = function (template) {
 }
 
 Gauge.prototype.enable = function () {
-  this.disabled = false
-  if (this.tty) this._enableEvents()
+  this._disabled = false
+  if (this._tty) this._enableEvents()
   if (this._showing) this.show()
 }
 
@@ -92,66 +93,66 @@ Gauge.prototype.disable = function () {
     this._doRedraw()
     this._showing = true
   }
-  this.disabled = true
-  if (this.tty) this._disableEvents()
+  this._disabled = true
+  if (this._tty) this._disableEvents()
 }
 
 Gauge.prototype._enableEvents = function () {
-  this.tty.on('resize', this._$$handleSizeChange)
-  if (this.fixedFramerate) {
-    this.redrawTracker = setInterval(this._$$doRedraw, this.updateInterval)
+  this._tty.on('resize', this._$$handleSizeChange)
+  if (this._fixedFramerate) {
+    this.redrawTracker = setInterval(this._$$doRedraw, this._updateInterval)
     if (this.redrawTracker.unref) this.redrawTracker.unref()
   }
 }
 
 Gauge.prototype._disableEvents = function () {
-  this.tty.removeListener('resize', this._$$handleSizeChange)
-  if (this.fixedFramerate) clearInterval(this.redrawTracker)
+  this._tty.removeListener('resize', this._$$handleSizeChange)
+  if (this._fixedFramerate) clearInterval(this.redrawTracker)
 }
 
 Gauge.prototype.hide = function () {
-  if (this.disabled) return
+  if (this._disabled) return
   if (!this._showing) return
   this._showing = false
   this._doRedraw()
 }
 
 Gauge.prototype.show = function (section, completed) {
-  if (this.disabled) return
+  if (this._disabled) return
   this._showing = true
   if (typeof section === 'string') {
-    this.status.section = section
+    this._status.section = section
   } else if (typeof section === 'object') {
     var sectionKeys = Object.keys(section)
     for (var ii = 0; ii < sectionKeys.length; ++ii) {
       var key = sectionKeys[ii]
-      this.status[key] = section[key]
+      this._status[key] = section[key]
     }
   }
-  if (completed != null) this.status.completed = completed
+  if (completed != null) this._status.completed = completed
   this._needsRedraw = true
-  if (!this.fixedFramerate) this._doRedraw()
+  if (!this._fixedFramerate) this._doRedraw()
 }
 
 Gauge.prototype.pulse = function (subsection) {
-  if (this.disabled) return
+  if (this._disabled) return
   if (!this._showing) return
-  this.status.subsection = subsection || ''
-  this.status.spun ++
+  this._status.subsection = subsection || ''
+  this._status.spun ++
   this._needsRedraw = true
-  if (!this.fixedFramerate) this._doRedraw()
+  if (!this._fixedFramerate) this._doRedraw()
 }
 
 Gauge.prototype._handleSizeChange = function () {
-  this._gauge.setWidth(this.tty.columns - 1)
+  this._gauge.setWidth(this._tty.columns - 1)
   this._needsRedraw = true
 }
 
 Gauge.prototype._doRedraw = function () {
-  if (this.disabled || this._paused) return
-  if (!this.fixedFramerate) {
+  if (this._disabled || this._paused) return
+  if (!this._fixedFramerate) {
     var now = Date.now()
-    if (this._lastUpdateAt && now - this._lastUpdateAt < this.updateInterval) return
+    if (this._lastUpdateAt && now - this._lastUpdateAt < this._updateInterval) return
     this._lastUpdateAt = now
   }
   if (!this._showing && this._onScreen) {
@@ -171,7 +172,7 @@ Gauge.prototype._doRedraw = function () {
     }
   }
   if (!this._needsRedraw) return
-  if (!this._writeTo.write(this._gauge.show(this.status))) {
+  if (!this._writeTo.write(this._gauge.show(this._status))) {
     this._paused = true
     this._writeTo.on('drain', callWith(this, function () {
       this._paused = false
