@@ -50,6 +50,12 @@ to 2.5.0, we watch for them on stdout if the tty is stderr.) Resizes to
 larger window sizes will be clean, but shrinking the window will always
 result in some cruft.
 
+**IMPORTANT:** If you prevously were passing in a non-tty stream but you still
+want output (for example, a stream wrapped by the `ansi` module) then you
+need to pass in the **tty** option below, as `gauge` needs access to
+the underlying tty in order to do things like terminal resizes and terminal
+width detection.
+
 The **options** object can have the following properties, all of which are
 optional:
 
