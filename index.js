@@ -44,9 +44,6 @@ function Gauge (arg1, arg2) {
     : options.fixedFramerate
   this._lastUpdateAt = null
   this._updateInterval = options.updateInterval == null ? 50 : options.updateInterval
-  this._tty = options.tty ||
-    (writeTo === process.stderr && process.stdout.isTTY && process.stdout) ||
-    (writeTo.isTTY && writeTo)
 
   var themes = options.themes || defaultThemes
   var theme = options.theme || themes({hasUnicode: hasUnicode(), hasColor: hasColor})
@@ -57,9 +54,9 @@ function Gauge (arg1, arg2) {
     {type: 'section', kerning: 1},
     {type: 'subsection', kerning: 1}
   ]
+  this.setWriteTo(writeTo, options.tty)
   var PlumbingClass = options.Plumbing || Plumbing
-  this._gauge = new PlumbingClass(theme, template, ((this._tty && this._tty.columns) || 80) - 1)
-  this._writeTo = writeTo
+  this._gauge = new PlumbingClass(theme, template, this.getWidth())
 
   this._$$doRedraw = callWith(this, this._doRedraw)
   this._$$handleSizeChange = callWith(this, this._handleSizeChange)
@@ -78,6 +75,22 @@ Gauge.prototype = {}
 
 Gauge.prototype.setTemplate = function (template) {
   this._gauge.setTemplate(template)
+}
+
+Gauge.prototype.getWidth = function () {
+  return ((this._tty && this._tty.columns) || 80) - 1
+}
+
+Gauge.prototype.setWriteTo = function (writeTo, tty) {
+  var enabled = !this._disabled
+  if (enabled) this.disable()
+  this._writeTo = writeTo
+  this._tty = tty ||
+    (writeTo === process.stderr && process.stdout.isTTY && process.stdout) ||
+    (writeTo.isTTY && writeTo) ||
+    this._tty
+  if (this._gauge) this._gauge.setWidth(this.getWidth())
+  if (enabled) this.enable()
 }
 
 Gauge.prototype.enable = function () {
