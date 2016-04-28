@@ -33,15 +33,16 @@ fire-and-forget interface to displaying your status information.
 ```
 var Gauge = require("gauge")
 
-var gauge = new Gauge(stream, [options])
+var gauge = new Gauge([stream], [options])
 ```
 
-* **stream** – A stream that progress bar updates are to be written to. Gauge honors
-  backpressure and will pause most writing if it is indicated.
+* **stream** – *(optional, default STDERR)* A stream that progress bar
+  updates are to be written to.  Gauge honors backpressure and will pause
+  most writing if it is indicated.
 * **options** – *(optional)* An option object.
 
 Constructs a new gauge. Gauges are drawn on a single line, and are not drawn
-if the current terminal isn't a tty.
+if **stream** isn't a tty and a tty isn't explicitly provided.
 
 If **stream** is a terminal or if you pass in **tty** to **options** then we
 will detect terminal resizes and redraw to fit.  We do this by watching for

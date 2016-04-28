@@ -1,5 +1,4 @@
 'use strict'
-var validate = require('aproba')
 var Plumbing = require('./plumbing.js')
 var hasUnicode = require('has-unicode')
 var hasColor = require('./has-color.js')
@@ -16,9 +15,18 @@ function callWith (obj, method) {
   }
 }
 
-function Gauge (writeTo, options) {
-  if (!options) options = {}
-  validate('OO', [writeTo, options])
+function Gauge (arg1, arg2) {
+  var options, writeTo
+  if (arg1 && arg1.write) {
+    writeTo = arg1
+    options = arg2 || {}
+  } else if (arg2 && arg2.write) {
+    writeTo = arg2
+    options = arg1 || {}
+  } else {
+    writeTo = process.stderr
+    options = arg1 || arg2 || {}
+  }
 
   this.status = {
     spun: 0,
