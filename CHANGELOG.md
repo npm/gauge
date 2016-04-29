@@ -1,3 +1,24 @@
+### v2.3.0
+
+#### FEATURES
+
+* Add setTemplate & setTheme back in.
+* Add support for named themes, you can now ask for things like 'colorASCII'
+  and 'brailleSpinner'.  Of course, you can still pass in theme objects.
+  Additionally you can now pass in an object with `hasUnicode`, `hasColor` and
+  `platform` keys in order to override our guesses as to those values when
+  selecting a default theme from the themeset.
+* Make the output stream optional (it defaults to `process.stderr` now).
+* Add `setWriteTo(stream[, tty])` to change the output stream and,
+  optionally, tty.
+
+#### BUG FIXES & REFACTORING
+
+* Abort the display phase early if we're supposed to be hidden and we are.
+* Stop printing a bunch of spaces at the end of lines, since we're already
+  using an erase-to-end-of-line code anyway.
+* The unicode themes were missing the subsection separator.
+
 ### v2.2.1
 
 * Fix image in readme
