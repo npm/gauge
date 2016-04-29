@@ -45,9 +45,8 @@ function Gauge (arg1, arg2) {
   this._lastUpdateAt = null
   this._updateInterval = options.updateInterval == null ? 50 : options.updateInterval
 
-  var themes = options.themes || defaultThemes
-  var theme = options.theme || themes({hasUnicode: hasUnicode(), hasColor: hasColor})
-  if (typeof theme === 'string') theme = themes.getTheme(theme)
+  this._themes = options.themes || defaultThemes
+  var theme = this._computeTheme(options.theme)
   var template = options.template || [
     {type: 'progressbar', length: 20},
     {type: 'activityIndicator', kerning: 1, length: 1},
@@ -75,6 +74,29 @@ Gauge.prototype = {}
 
 Gauge.prototype.setTemplate = function (template) {
   this._gauge.setTemplate(template)
+  if (this._showing) this._requestRedraw()
+}
+
+Gauge.prototype._computeTheme = function (theme) {
+  if (!theme) theme = {}
+  if (theme && (Object.keys(theme).length === 0 || theme.hasUnicode != null || theme.hasColor != null)) {
+    var useUnicode = theme.hasUnicode == null ? hasUnicode() : theme.hasUnicode
+    var useColor = theme.hasColor == null ? hasColor : theme.hasColor
+    theme = this._themes.getDefault({hasUnicode: useUnicode, hasColor: useColor, platform: theme.platform})
+  } else if (typeof theme === 'string') {
+    theme = this._themes.getTheme(theme)
+  }
+  return theme
+}
+
+Gauge.prototype.setTheme = function (theme) {
+  this._gauge.setTheme(theme)
+  if (this._showing) this._requestRedraw()
+}
+
+Gauge.prototype._requestRedraw = function () {
+    this._needsRedraw = true
+    if (!this._fixedFramerate) this._doRedraw()
 }
 
 Gauge.prototype.getWidth = function () {
@@ -143,8 +165,7 @@ Gauge.prototype.show = function (section, completed) {
     }
   }
   if (completed != null) this._status.completed = completed
-  this._needsRedraw = true
-  if (!this._fixedFramerate) this._doRedraw()
+  this._requestRedraw()
 }
 
 Gauge.prototype.pulse = function (subsection) {
@@ -152,13 +173,12 @@ Gauge.prototype.pulse = function (subsection) {
   if (!this._showing) return
   this._status.subsection = subsection || ''
   this._status.spun ++
-  this._needsRedraw = true
-  if (!this._fixedFramerate) this._doRedraw()
+  this._requestRedraw()
 }
 
 Gauge.prototype._handleSizeChange = function () {
   this._gauge.setWidth(this._tty.columns - 1)
-  this._needsRedraw = true
+  this._requestRedraw()
 }
 
 Gauge.prototype._doRedraw = function () {

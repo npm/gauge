@@ -73,7 +73,11 @@ optional:
   to `gauge/themes`, see the [themes] documentation for details.
 * **theme**: Select a theme for use, it can be a:
   * Theme object, in which case the **themes** is not used.
-  * The name of a theme, which will be looked up in the current *themes* object.
+  * The name of a theme, which will be looked up in the current *themes*
+    object.
+  * A configuration object with any of `hasUnicode`, `hasColor` or
+    `platform` keys, which if wlll be used to override our guesses when making
+    a default theme selection.
 
   If no theme is selected then a default is picked using a combination of our
   best guesses at your OS, color support and unicode support.
