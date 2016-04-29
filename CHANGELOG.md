@@ -1,3 +1,8 @@
+### v2.3.1
+
+* Fix a refactor bug in setTheme where it wasn't accepting the various types
+  of args it should.
+
 ### v2.3.0
 
 #### FEATURES

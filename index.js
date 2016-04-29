@@ -90,7 +90,7 @@ Gauge.prototype._computeTheme = function (theme) {
 }
 
 Gauge.prototype.setTheme = function (theme) {
-  this._gauge.setTheme(theme)
+  this._gauge.setTheme(this._computeTheme(theme))
   if (this._showing) this._requestRedraw()
 }
 
