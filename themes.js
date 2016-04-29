@@ -33,7 +33,8 @@ themes.addTheme('brailleSpinner', {
     complete: '░',
     remaining: '⠂'
   },
-  activityIndicatorTheme: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+  activityIndicatorTheme: '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏',
+  preSubsection: '>'
 })
 
 themes.addTheme('colorBrailleSpinner', themes.getTheme('brailleSpinner'), {
