@@ -25,7 +25,7 @@
     "aproba": "^1.0.1",
     "has-color": "^0.1.7",
     "has-unicode": "^2.0.0",
-    "object-assign": "^4.0.1",
+    "object-assign": "^4.1.0",
     "signal-exit": "^2.1.2",
     "string-width": "^1.0.1",
     "strip-ansi": "^3.0.0",
