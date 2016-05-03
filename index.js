@@ -46,6 +46,7 @@ function Gauge (arg1, arg2) {
   this._updateInterval = options.updateInterval == null ? 50 : options.updateInterval
 
   this._themes = options.themes || defaultThemes
+  this._theme = options.theme
   var theme = this._computeTheme(options.theme)
   var template = options.template || [
     {type: 'progressbar', length: 20},
@@ -89,14 +90,20 @@ Gauge.prototype._computeTheme = function (theme) {
   return theme
 }
 
+Gauge.prototype.setThemeset = function (themes) {
+  this._themes = themes
+  this.setTheme(this._theme)
+}
+
 Gauge.prototype.setTheme = function (theme) {
   this._gauge.setTheme(this._computeTheme(theme))
   if (this._showing) this._requestRedraw()
+  this._theme = theme
 }
 
 Gauge.prototype._requestRedraw = function () {
-    this._needsRedraw = true
-    if (!this._fixedFramerate) this._doRedraw()
+  this._needsRedraw = true
+  if (!this._fixedFramerate) this._doRedraw()
 }
 
 Gauge.prototype.getWidth = function () {

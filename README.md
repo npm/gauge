@@ -137,9 +137,24 @@ Hides the gauge and ignores further calls to `show` or `pulse`.
 
 Shows the gauge and resumes updating when `show` or `pulse` is called.
 
+#### `gauge.setThemeset(themes)`
+
+Change the themeset to select a theme from. The same as the `themes` option
+used in the constructor. The theme will be reselected from this themeset.
+
 #### `gauge.setTheme(theme)`
 
-Change the active theme, will be displayed with the next show or pulse
+Change the active theme, will be displayed with the next show or pulse. This can be:
+
+* Theme object, in which case the **themes** is not used.
+* The name of a theme, which will be looked up in the current *themes*
+  object.
+* A configuration object with any of `hasUnicode`, `hasColor` or
+  `platform` keys, which if wlll be used to override our guesses when making
+  a default theme selection.
+
+If no theme is selected then a default is picked using a combination of our
+best guesses at your OS, color support and unicode support.
 
 #### `gauge.setTemplate(template)`
 
