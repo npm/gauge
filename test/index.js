@@ -235,39 +235,41 @@ test('hideCursor:false', function (t) {
 /* todo missing:
 
 constructor
+  arg2 is writeTo, arg1 is opts
+  arg2 is writeTo, arg1 is null
+  no args, all defaults
 
-  writeTo: process.stderr & process.stdout IS A TTY (or isn't)
-  cleanupOnExit: explicitly set to true
+setTemplate
+setThemeset
+setTheme
+  w/ theme selector
+  w/ theme name
+  w/ theme object
+setWriteTo
+  while enabled/disabled
+  w/ tty
+  w/o tty & writeTo = process.stderr & process.stdout isTTY
+  w/o tty & writeTo = process.stderr & process.stdout !isTTY
+enable
+  w/ _showing = true
+hide
+  w/ disabled
+  w/ !disabled & !showing
+  w/ !disabled & showing
+  w/ these & cb
+show
+  w/ disabled
+  w/ object arg1
+pulse
+  w/ disabled
+  w/ !showing
 
-disable while showing then enable
+anything to do with _fixedFramerate
 
-enable while fixedFramerate is false
+trigger _doRedraw
+  w/o showing & w/o _onScreen (eg, hide, show, hide, I think)
+  w/o _needsRedraw
 
-enable while fixedFramerate is true & redrawTracker.unref is false (0.8)
-
-disable while fixedFramerate is false
-
-hide()
-
-show() while disabled
-
-show() with object args
-
-show() with neither string nor object (undefined? number?)
-
-show() with fixedFramerate == false
-
-pulse() while disabled
-pulse while _showing == false
-pulse where fixedFramerate == false
-
-implicit:
-  _doRedraw will get called with fixedFramerate = false if we test the above
-  trigger a show + redraw with hideCursor = true
-  trigger a hide + redraw with hideCursor = true
-
-trigger a _doRedraw when _needsRedraw is false
-
-TEST BACKPRESSURE
+Everything to do with back pressure from _writeTo
 
 */
