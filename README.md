@@ -118,9 +118,17 @@ Without it, completion is just not updated. You'll also note that completion
 can be passed in as part of a status object as the first argument. If both
 it and the completed argument are passed in, the completed argument wins.
 
-#### `gauge.hide()`
+#### `gauge.hide([cb])`
 
-Removes the gauge from the terminal.
+Removes the gauge from the terminal.  Optionally, callback `cb` after IO has
+had an opportunity to happen (currently this just means after `setImmediate`
+has called back.)
+
+It turns out this is important when you're pausing the progress bar on one
+filehandle and printing to another– otherwise (with a big enough print) node
+can end up printing the "end progress bar" bits to the progress bar filehandle
+while other stuff is printing to another filehandle. These getting interleaved
+can cause corruption in some terminals.
 
 #### `gauge.pulse([subsection])`
 

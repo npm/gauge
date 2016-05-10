@@ -6,6 +6,7 @@ var onExit = require('signal-exit')
 var defaultThemes = require('./themes')
 var setInterval = require('./set-interval.js')
 var process = require('./process.js')
+var setImmediate = require('./set-immediate')
 
 module.exports = Gauge
 
@@ -152,11 +153,12 @@ Gauge.prototype._disableEvents = function () {
   if (this._fixedFramerate) clearInterval(this.redrawTracker)
 }
 
-Gauge.prototype.hide = function () {
-  if (this._disabled) return
-  if (!this._showing) return
+Gauge.prototype.hide = function (cb) {
+  if (this._disabled) return cb && process.nextTick(cb)
+  if (!this._showing) return cb && process.nextTick(cb)
   this._showing = false
   this._doRedraw()
+  cb && setImmediate(cb)
 }
 
 Gauge.prototype.show = function (section, completed) {
