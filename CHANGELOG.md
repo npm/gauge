@@ -1,3 +1,10 @@
+### v2.4.0
+
+* Add support for setting themesets on existing gauge objects.
+* Add post-IO callback to `gauge.hide()` as it is somtetimes necessary when
+  your terminal is interleaving output from multiple filehandles (ie, stdout
+  & stderr).
+
 ### v2.3.1
 
 * Fix a refactor bug in setTheme where it wasn't accepting the various types
