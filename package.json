@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/iarna/gauge",
   "dependencies": {
-    "aproba": "^1.0.1",
+    "aproba": "^1.0.3",
     "has-color": "^0.1.7",
     "has-unicode": "^2.0.0",
     "object-assign": "^4.0.1",
