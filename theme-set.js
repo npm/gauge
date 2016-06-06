@@ -17,6 +17,10 @@ ThemeSetProto.newTheme = function (parent, theme) {
   return objectAssign({}, parent, theme)
 }
 
+ThemeSetProto.getThemeNames = function () {
+  return Object.keys(this.themes)
+}
+
 ThemeSetProto.addTheme = function (name, parent, theme) {
   this.themes[name] = this.newTheme(parent, theme)
 }

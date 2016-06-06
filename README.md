@@ -231,6 +231,11 @@ Adds a named theme to the themeset.  You can pass in either a theme object,
 as returned by `themes.newTheme` or the arguments you'd pass to
 `themes.newTheme`.
 
+#### themes.getThemeNames()
+
+Return a list of all of the names of the themes in this themeset. Suitable
+for use in `themes.getTheme(…)`.
+
 #### themes.getTheme(name)
 
 Returns the theme object from this theme set named `name`.
