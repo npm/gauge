@@ -1,3 +1,8 @@
+### v2.5.0
+
+* Add way to programmatically fetch a list of theme names in a themeset
+  (`Themeset.getThemeNames`).
+
 ### v2.4.0
 
 * Add support for setting themesets on existing gauge objects.
