@@ -36,5 +36,27 @@
     "standard": "^6.0.7",
     "tap": "^5.6.0",
     "through2": "^2.0.0"
-  }
+  },
+  "files": [
+    "base-theme.js",
+    "CHANGELOG.md",
+    "console-strings.js",
+    "error.js",
+    "has-color.js",
+    "index.js",
+    "LICENSE",
+    "package.json",
+    "plumbing.js",
+    "process.js",
+    "progress-bar.js",
+    "README.md",
+    "render-template.js",
+    "set-immediate.js",
+    "set-interval.js",
+    "spin.js",
+    "template-item.js",
+    "theme-set.js",
+    "themes.js",
+    "wide-truncate.js"
+  ]
 }
