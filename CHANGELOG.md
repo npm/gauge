@@ -1,3 +1,10 @@
+### v2.5.1
+
+* Update to `signal-exit@3.0.0`, which fixes a compatibility bug with the
+  node profiler.
+* [#39](https://github.com/iarna/gauge/pull/39) Fix tests on 0.10 and add
+  a missing devDependency. ([@helloyou2012](https://github.com/helloyou2012))
+
 ### v2.5.0
 
 * Add way to programmatically fetch a list of theme names in a themeset
