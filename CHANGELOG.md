@@ -1,3 +1,7 @@
+### v2.5.2
+
+* Externalized `./console-strings.js` into `console-control-strings`.
+
 ### v2.5.1
 
 * Update to `signal-exit@3.0.0`, which fixes a compatibility bug with the
