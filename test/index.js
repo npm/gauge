@@ -180,11 +180,11 @@ test('hideCursor:true', function (t) {
     theme: ['THEME'],
     template: ['TEMPLATE'],
     enabled: true,
-    updateInterval: 10,
+    updateInterval: 90,
     fixedFramerate: true,
     hideCursor: true
   })
-  collectResults(11, andCursorHidden)
+  collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
   function andCursorHidden (got) {
     var expected = [
@@ -211,11 +211,11 @@ test('hideCursor:false', function (t) {
     theme: ['THEME'],
     template: ['TEMPLATE'],
     enabled: true,
-    updateInterval: 10,
+    updateInterval: 90,
     fixedFramerate: true,
     hideCursor: false
   })
-  collectResults(11, andCursorHidden)
+  collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
   function andCursorHidden (got) {
     var expected = [
