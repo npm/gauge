@@ -1,5 +1,5 @@
 'use strict'
-var consoleStrings = require('./console-strings.js')
+var consoleControl = require('console-control-strings')
 var renderTemplate = require('./render-template.js')
 var validate = require('aproba')
 
@@ -29,12 +29,12 @@ Plumbing.prototype.setWidth = function (width) {
 }
 
 Plumbing.prototype.hide = function () {
-  return consoleStrings.gotoSOL() + consoleStrings.eraseLine()
+  return consoleControl.gotoSOL() + consoleControl.eraseLine()
 }
 
-Plumbing.prototype.hideCursor = consoleStrings.hideCursor
+Plumbing.prototype.hideCursor = consoleControl.hideCursor
 
-Plumbing.prototype.showCursor = consoleStrings.showCursor
+Plumbing.prototype.showCursor = consoleControl.showCursor
 
 Plumbing.prototype.show = function (status) {
   var values = Object.create(this.theme)
@@ -43,5 +43,5 @@ Plumbing.prototype.show = function (status) {
   }
 
   return renderTemplate(this.width, this.template, values).trim() +
-         consoleStrings.eraseLine() + consoleStrings.gotoSOL()
+         consoleControl.eraseLine() + consoleControl.gotoSOL()
 }

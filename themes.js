@@ -1,5 +1,5 @@
 'use strict'
-var consoleStrings = require('./console-strings')
+var consoleControl = require('console-control-strings')
 var ThemeSet = require('./theme-set.js')
 
 var themes = module.exports = new ThemeSet()
@@ -17,12 +17,12 @@ themes.addTheme('ASCII', {
 
 themes.addTheme('colorASCII', themes.getTheme('ASCII'), {
   progressbarTheme: {
-    preComplete: consoleStrings.color('inverse'),
+    preComplete: consoleControl.color('inverse'),
     complete: ' ',
-    postComplete: consoleStrings.color('stopInverse'),
-    preRemaining: consoleStrings.color('brightBlack'),
+    postComplete: consoleControl.color('stopInverse'),
+    preRemaining: consoleControl.color('brightBlack'),
     remaining: '.',
-    postRemaining: consoleStrings.color('reset')
+    postRemaining: consoleControl.color('reset')
   }
 })
 
@@ -39,12 +39,12 @@ themes.addTheme('brailleSpinner', {
 
 themes.addTheme('colorBrailleSpinner', themes.getTheme('brailleSpinner'), {
   progressbarTheme: {
-    preComplete: consoleStrings.color('inverse'),
+    preComplete: consoleControl.color('inverse'),
     complete: ' ',
-    postComplete: consoleStrings.color('stopInverse'),
-    preRemaining: consoleStrings.color('brightBlack'),
+    postComplete: consoleControl.color('stopInverse'),
+    preRemaining: consoleControl.color('brightBlack'),
     remaining: '░',
-    postRemaining: consoleStrings.color('reset')
+    postRemaining: consoleControl.color('reset')
   }
 })
 
