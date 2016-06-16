@@ -1,3 +1,9 @@
+### v2.5.3
+
+* Default to `enabled` only if we have a tty.  Users can always override
+  this by passing in the `enabled` option explicitly or by calling calling
+  `gauge.enable()`.
+
 ### v2.5.2
 
 * Externalized `./console-strings.js` into `console-control-strings`.
