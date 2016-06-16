@@ -124,12 +124,14 @@ Gauge.prototype.setWriteTo = function (writeTo, tty) {
 }
 
 Gauge.prototype.enable = function () {
+  if (!this._disabled) return
   this._disabled = false
   if (this._tty) this._enableEvents()
   if (this._showing) this.show()
 }
 
 Gauge.prototype.disable = function () {
+  if (this._disabled) return
   if (this._showing) {
     this._lastUpdateAt = null
     this._showing = false
