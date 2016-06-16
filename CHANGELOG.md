@@ -1,3 +1,11 @@
+### v2.6.0
+
+* Bug fix: Don't run the code associated with `enable`/`disable` if the gauge
+  is already enabled or disabled respectively.  This prevents leaking event
+  listeners, amongst other weirdness.
+* New feature: Template items can have default values that will be used if no
+  value was otherwise passed in.
+
 ### v2.5.3
 
 * Default to `enabled` only if we have a tty.  Users can always override
