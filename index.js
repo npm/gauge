@@ -52,8 +52,8 @@ function Gauge (arg1, arg2) {
   var template = options.template || [
     {type: 'progressbar', length: 20},
     {type: 'activityIndicator', kerning: 1, length: 1},
-    {type: 'section', kerning: 1},
-    {type: 'subsection', kerning: 1}
+    {type: 'section', kerning: 1, default: ''},
+    {type: 'subsection', kerning: 1, default: ''}
   ]
   this.setWriteTo(writeTo, options.tty)
   var PlumbingClass = options.Plumbing || Plumbing

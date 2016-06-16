@@ -62,8 +62,15 @@ function prepareItems (width, template, values) {
     var cloned = new TemplateItem(item, width)
     var type = cloned.type
     if (cloned.value == null) {
-      if (!(type in values)) throw new error.MissingTemplateValue(cloned, values)
-      cloned.value = values[type]
+      if (!(type in values)) {
+        if (cloned.default == null) {
+          throw new error.MissingTemplateValue(cloned, values)
+        } else {
+          cloned.value = cloned.default
+        }
+      } else {
+        cloned.value = values[type]
+      }
     }
     if (cloned.value == null || cloned.value === '') return null
     cloned.index = index

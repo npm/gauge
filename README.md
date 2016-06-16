@@ -321,8 +321,8 @@ will be turned into the gauge line.  The default template is:
 [
     {type: 'progressbar', length: 20},
     {type: 'activityIndicator', kerning: 1, length: 1},
-    {type: 'section', kerning: 1},
-    {type: 'subsection', kerning: 1}
+    {type: 'section', kerning: 1, default: ''},
+    {type: 'subsection', kerning: 1, default: ''}
 ]
 ```
 
@@ -348,6 +348,8 @@ be be included verbatum in the output, or objects with the following properties:
 * *length* – Provides a single value for both *minLength* and *maxLength*. If both
   *length* and *minLength or *maxLength* are specifed then the latter take precedence.
 * *value* – A literal value to use for this template item.
+* *default* – A default value to use for this template item if a value
+  wasn't otherwise passed in.
 
 ### PLUMBING
 
