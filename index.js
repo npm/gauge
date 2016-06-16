@@ -66,7 +66,7 @@ function Gauge (arg1, arg2) {
     onExit(callWith(this, this.disable))
   }
 
-  if (options.enabled || options.enabled == null) {
+  if (options.enabled || (options.enabled == null && this._tty && this._tty.isTTY)) {
     this.enable()
   } else {
     this.disable()

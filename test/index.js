@@ -35,7 +35,7 @@ function RecordCall (name) {
 
 test('defaults', function (t) {
   var gauge = new Gauge(process.stdout)
-  t.is(gauge._disabled, false, 'disabled')
+  t.is(gauge._disabled, !process.stdout.isTTY, 'disabled')
   t.is(gauge._updateInterval, 50, 'updateInterval')
   if (process.stdout.isTTY) {
     t.is(gauge._tty, process.stdout, 'tty')

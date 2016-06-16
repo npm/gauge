@@ -90,9 +90,9 @@ optional:
   as **stream**.  This is used for detecting the width of the terminal and
   resizes. The width used is `tty.columns - 1`. If no tty is available then
   a width of `79` is assumed.
-* **enabled**: Defaults to true.  If true the gauge starts enabled.  If
-  disabled then all update commands are ignored and no gauge will be printed
-  until you call `.enable()`.
+* **enabled**: Defaults to true if `tty` is a TTY, false otherwise.  If true
+  the gauge starts enabled.  If disabled then all update commands are
+  ignored and no gauge will be printed until you call `.enable()`.
 * **Plumbing**: The class to use to actually generate the gauge for
   printing.  This defaults to `require('gauge/plumbing')` and ordinarly you
   shouldn't need to override this.
