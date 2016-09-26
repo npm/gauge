@@ -35,7 +35,7 @@
   "devDependencies": {
     "readable-stream": "^2.0.6",
     "require-inject": "^1.4.0",
-    "standard": "^7.1.2",
+    "standard": "^8.2.0",
     "tap": "^5.7.2",
     "through2": "^2.0.0"
   },
