@@ -66,6 +66,7 @@ test('construct', function (t) {
   t.is(results.columns, 15, 'width passed through')
   t.same(results.theme, ['THEME'], 'theme passed through')
   t.same(results.template, ['TEMPLATE'], 'template passed through')
+  t.is(gauge.isEnabled(), false, 'disabled')
 
   t.done()
 })
@@ -186,6 +187,7 @@ test('hideCursor:true', function (t) {
   })
   collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
+  t.is(gauge.isEnabled(), true, 'enabled')
   function andCursorHidden (got) {
     var expected = [
       ['hideCursor', []],

@@ -74,6 +74,10 @@ function Gauge (arg1, arg2) {
 }
 Gauge.prototype = {}
 
+Gauge.prototype.isEnabled = function () {
+  return !this._disabled
+}
+
 Gauge.prototype.setTemplate = function (template) {
   this._gauge.setTemplate(template)
   if (this._showing) this._requestRedraw()
