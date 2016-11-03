@@ -1,3 +1,8 @@
+### v2.7.1
+
+* Bug fix: Calls to show/pulse while the progress bar is disabled should still
+  update our internal representation of what would be shown should it be enabled.
+
 ### v2.7.0
 
 * New feature: Add new `isEnabled` method to allow introspection of the gauge's

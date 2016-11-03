@@ -168,7 +168,6 @@ Gauge.prototype.hide = function (cb) {
 }
 
 Gauge.prototype.show = function (section, completed) {
-  if (this._disabled) return
   this._showing = true
   if (typeof section === 'string') {
     this._status.section = section
@@ -180,14 +179,15 @@ Gauge.prototype.show = function (section, completed) {
     }
   }
   if (completed != null) this._status.completed = completed
+  if (this._disabled) return
   this._requestRedraw()
 }
 
 Gauge.prototype.pulse = function (subsection) {
-  if (this._disabled) return
-  if (!this._showing) return
   this._status.subsection = subsection || ''
   this._status.spun ++
+  if (this._disabled) return
+  if (!this._showing) return
   this._requestRedraw()
 }
 
