@@ -85,12 +85,12 @@ Gauge.prototype.setTemplate = function (template) {
 
 Gauge.prototype._computeTheme = function (theme) {
   if (!theme) theme = {}
-  if (theme && (Object.keys(theme).length === 0 || theme.hasUnicode != null || theme.hasColor != null)) {
+  if (typeof theme === 'string') {
+    theme = this._themes.getTheme(theme)
+  } else if (theme && (Object.keys(theme).length === 0 || theme.hasUnicode != null || theme.hasColor != null)) {
     var useUnicode = theme.hasUnicode == null ? hasUnicode() : theme.hasUnicode
     var useColor = theme.hasColor == null ? hasColor : theme.hasColor
     theme = this._themes.getDefault({hasUnicode: useUnicode, hasColor: useColor, platform: theme.platform})
-  } else if (typeof theme === 'string') {
-    theme = this._themes.getTheme(theme)
   }
   return theme
 }
