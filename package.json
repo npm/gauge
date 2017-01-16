@@ -25,7 +25,7 @@
   "dependencies": {
     "aproba": "^1.0.3",
     "console-control-strings": "^1.0.0",
-    "supports-color": "^0.2.0",
+    "supports-color": "^3.2.3",
     "has-unicode": "^2.0.0",
     "object-assign": "^4.1.0",
     "signal-exit": "^3.0.0",
