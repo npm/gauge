@@ -62,9 +62,8 @@ function Gauge (arg1, arg2) {
   this._$$doRedraw = callWith(this, this._doRedraw)
   this._$$handleSizeChange = callWith(this, this._handleSizeChange)
 
-  if (options.cleanupOnExit == null || options.cleanupOnExit) {
-    onExit(callWith(this, this.disable))
-  }
+  this._cleanupOnExit = options.cleanupOnExit == null || options.cleanupOnExit
+  this._removeOnExit = null
 
   if (options.enabled || (options.enabled == null && this._tty && this._tty.isTTY)) {
     this.enable()
@@ -147,6 +146,9 @@ Gauge.prototype.disable = function () {
 }
 
 Gauge.prototype._enableEvents = function () {
+  if (this._cleanupOnExit) {
+    this._removeOnExit = onExit(callWith(this, this.disable))
+  }
   this._tty.on('resize', this._$$handleSizeChange)
   if (this._fixedFramerate) {
     this.redrawTracker = setInterval(this._$$doRedraw, this._updateInterval)
@@ -157,6 +159,7 @@ Gauge.prototype._enableEvents = function () {
 Gauge.prototype._disableEvents = function () {
   this._tty.removeListener('resize', this._$$handleSizeChange)
   if (this._fixedFramerate) clearInterval(this.redrawTracker)
+  if (this._removeOnExit) this._removeOnExit()
 }
 
 Gauge.prototype.hide = function (cb) {
