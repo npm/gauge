@@ -9,6 +9,7 @@ var Plumbing = requireInject('../plumbing.js', {
   'console-control-strings': {
     eraseLine: function () { return 'ERASE' },
     gotoSOL: function () { return 'CR' },
+    color: function (to) { return 'COLOR:' + to },
     hideCursor: function () { return 'HIDE' },
     showCursor: function () { return 'SHOW' }
   }
@@ -37,30 +38,30 @@ test('hide', function (t) {
 })
 
 test('show', function (t) {
-  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test"}ERASECR')
+  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test"}COLOR:resetERASECR')
   t.end()
 })
 
 test('width', function (t) {
   var plumbing = new Plumbing(theme, template)
-  t.is(plumbing.show({name: 'test'}), 'w:80, t:[{"type":"name"}], v:{"name":"test"}ERASECR')
+  t.is(plumbing.show({name: 'test'}), 'w:80, t:[{"type":"name"}], v:{"name":"test"}COLOR:resetERASECR')
   t.end()
 })
 
 test('setTheme', function (t) {
   plumbing.setTheme({x: 'abc'})
-  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"}], v:{"name":"test","x":"abc"}COLOR:resetERASECR')
   t.end()
 })
 
 test('setTemplate', function (t) {
   plumbing.setTemplate([{type: 'name'}, {type: 'x'}])
-  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.is(plumbing.show({name: 'test'}), 'w:10, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}COLOR:resetERASECR')
   t.end()
 })
 
 test('setWidth', function (t) {
   plumbing.setWidth(20)
-  t.is(plumbing.show({name: 'test'}), 'w:20, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}ERASECR')
+  t.is(plumbing.show({name: 'test'}), 'w:20, t:[{"type":"name"},{"type":"x"}], v:{"name":"test","x":"abc"}COLOR:resetERASECR')
   t.end()
 })
