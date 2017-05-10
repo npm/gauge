@@ -82,13 +82,11 @@ function prepareItems (width, template, values) {
 
   var output = template.map(cloneAndObjectify).filter(function (item) { return item != null })
 
-  var outputLength = 0
   var remainingSpace = width
   var variableCount = output.length
 
   function consumeSpace (length) {
     if (length > remainingSpace) length = remainingSpace
-    outputLength += length
     remainingSpace -= length
   }
 
