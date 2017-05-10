@@ -31,7 +31,7 @@
     "signal-exit": "^3.0.0",
     "string-width": "^1.0.1",
     "strip-ansi": "^3.0.1",
-    "wide-align": "^1.1.0"
+    "wide-align": "^1.1.2"
   },
   "devDependencies": {
     "readable-stream": "^2.0.6",
