@@ -207,7 +207,7 @@ var ThemeSet = require('gauge/theme-set')
 var themes = new ThemeSet()
 // or
 var themes = require('gauge/themes')
-var mythemes = themes.newThemeset() // creates a new themeset based on the default themes
+var mythemes = themes.newThemeSet() // creates a new themeset based on the default themes
 ```
 
 #### themes(opts)
@@ -311,7 +311,7 @@ This *mixes-in* `theme` into all themes currently defined. It also adds it
 to the default parent theme for this themeset, so future themes added to
 this themeset will get the values from `theme` by default.
 
-#### themes.newThemeset()
+#### themes.newThemeSet()
 
 Copy the current themeset into a new one.  This allows you to easily inherit
 one themeset from another.
