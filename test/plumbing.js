@@ -6,7 +6,7 @@ var Plumbing = requireInject('../plumbing.js', {
     if (values.x) values.x = values.x // pull in from parent object for stringify
     return 'w:' + width + ', t:' + JSON.stringify(template) + ', v:' + JSON.stringify(values)
   },
-  'console-control-strings': {
+  '../console-control-strings-mock.js': {
     eraseLine: function () { return 'ERASE' },
     gotoSOL: function () { return 'CR' },
     color: function (to) { return 'COLOR:' + to },

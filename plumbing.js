@@ -1,7 +1,7 @@
 'use strict'
 var paraquire = require('paraquire')(module)
 
-var consoleControl = require('console-control-strings')
+var consoleControl = require('./console-control-strings-mock.js')
 var renderTemplate = require('./render-template.js')
 var validate = paraquire('aproba')
 
