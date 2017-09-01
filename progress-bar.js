@@ -1,8 +1,10 @@
 'use strict'
-var validate = require('aproba')
+var paraquire = require('paraquire')(module)
+
+var validate = paraquire('aproba')
 var renderTemplate = require('./render-template.js')
 var wideTruncate = require('./wide-truncate')
-var stringWidth = require('string-width')
+var stringWidth = paraquire('string-width')
 
 module.exports = function (theme, width, completed) {
   validate('ONN', [theme, width, completed])

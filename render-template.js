@@ -1,7 +1,9 @@
 'use strict'
-var align = require('wide-align')
-var validate = require('aproba')
-var objectAssign = require('object-assign')
+var paraquire = require('paraquire')(module)
+
+var align = paraquire('wide-align')
+var validate = paraquire('aproba')
+var objectAssign = paraquire('object-assign')
 var wideTruncate = require('./wide-truncate')
 var error = require('./error')
 var TemplateItem = require('./template-item')
