@@ -1,5 +1,7 @@
 'use strict'
-var stringWidth = require('string-width')
+var paraquire = require('paraquire')(module)
+
+var stringWidth = paraquire('string-width')
 
 module.exports = TemplateItem
 

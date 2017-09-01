@@ -1,5 +1,7 @@
 'use strict'
-var objectAssign = require('object-assign')
+var paraquire = require('paraquire')(module)
+
+var objectAssign = paraquire('object-assign')
 
 module.exports = function () {
   return ThemeSetProto.newThemeSet()

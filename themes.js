@@ -1,5 +1,7 @@
 'use strict'
-var consoleControl = require('console-control-strings')
+var paraquire = require('paraquire')(module)
+
+var consoleControl = paraquire('console-control-strings')
 var ThemeSet = require('./theme-set.js')
 
 var themes = module.exports = new ThemeSet()

@@ -1,6 +1,8 @@
 'use strict'
-var stringWidth = require('string-width')
-var stripAnsi = require('strip-ansi')
+var paraquire = require('paraquire')(module)
+
+var stringWidth = paraquire('string-width')
+var stripAnsi = paraquire('strip-ansi')
 
 module.exports = wideTruncate
 
