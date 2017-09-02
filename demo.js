@@ -1,6 +1,8 @@
 var Gauge = require('./')
+var paraquire = require('paraquire')(module)
+
 var gaugeDefault = require('./themes.js')
-var onExit = require('signal-exit')
+var onExit = paraquire('signal-exit', {builtin: ['assert', 'events'], sandbox: {process: process}})
 
 var activeGauge
 
