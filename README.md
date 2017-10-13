@@ -194,7 +194,7 @@ var ourTheme = themes({hasUnicode: true, hasColor: false, platform: 'darwin'})
 
 // create a new theme based on the color ascii theme for this platform
 // that brackets the progress bar with arrows
-var ourTheme = themes.newTheme(theme(hasUnicode: false, hasColor: true}), {
+var ourTheme = themes.newTheme(themes({hasUnicode: false, hasColor: true}), {
   preProgressbar: '→',
   postProgressbar: '←'
 })
