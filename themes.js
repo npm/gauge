@@ -52,3 +52,6 @@ themes.setDefault({}, 'ASCII')
 themes.setDefault({hasColor: true}, 'colorASCII')
 themes.setDefault({platform: 'darwin', hasUnicode: true}, 'brailleSpinner')
 themes.setDefault({platform: 'darwin', hasUnicode: true, hasColor: true}, 'colorBrailleSpinner')
+themes.setDefault({platform: 'linux', hasUnicode: true}, 'brailleSpinner')
+themes.setDefault({platform: 'linux', hasUnicode: true, hasColor: true}, 'colorBrailleSpinner')
+
