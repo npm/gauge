@@ -46,12 +46,12 @@ if **stream** isn't a tty and a tty isn't explicitly provided.
 
 If **stream** is a terminal or if you pass in **tty** to **options** then we
 will detect terminal resizes and redraw to fit.  We do this by watching for
-`resize` events on the tty.  (To work around a bug in verisons of Node prior
+`resize` events on the tty.  (To work around a bug in versions of Node prior
 to 2.5.0, we watch for them on stdout if the tty is stderr.) Resizes to
 larger window sizes will be clean, but shrinking the window will always
 result in some cruft.
 
-**IMPORTANT:** If you prevously were passing in a non-tty stream but you still
+**IMPORTANT:** If you previously were passing in a non-tty stream but you still
 want output (for example, a stream wrapped by the `ansi` module) then you
 need to pass in the **tty** option below, as `gauge` needs access to
 the underlying tty in order to do things like terminal resizes and terminal
@@ -60,7 +60,7 @@ width detection.
 The **options** object can have the following properties, all of which are
 optional:
 
-* **updateInterval**: How often gauge updates should be drawn, in miliseconds.
+* **updateInterval**: How often gauge updates should be drawn, in milliseconds.
 * **fixedFramerate**: Defaults to false on node 0.8, true on everything
   else.  When this is true a timer is created to trigger once every
   `updateInterval` ms, when false, updates are printed as soon as they come
@@ -76,7 +76,7 @@ optional:
   * The name of a theme, which will be looked up in the current *themes*
     object.
   * A configuration object with any of `hasUnicode`, `hasColor` or
-    `platform` keys, which if wlll be used to override our guesses when making
+    `platform` keys, which if will be used to override our guesses when making
     a default theme selection.
 
   If no theme is selected then a default is picked using a combination of our
@@ -94,7 +94,7 @@ optional:
   the gauge starts enabled.  If disabled then all update commands are
   ignored and no gauge will be printed until you call `.enable()`.
 * **Plumbing**: The class to use to actually generate the gauge for
-  printing.  This defaults to `require('gauge/plumbing')` and ordinarly you
+  printing.  This defaults to `require('gauge/plumbing')` and ordinarily you
   shouldn't need to override this.
 * **cleanupOnExit**: Defaults to true. Ordinarily we register an exit
   handler to make sure your cursor is turned back on and the progress bar
@@ -162,7 +162,7 @@ Change the active theme, will be displayed with the next show or pulse. This can
 * The name of a theme, which will be looked up in the current *themes*
   object.
 * A configuration object with any of `hasUnicode`, `hasColor` or
-  `platform` keys, which if wlll be used to override our guesses when making
+  `platform` keys, which if will be used to override our guesses when making
   a default theme selection.
 
 If no theme is selected then a default is picked using a combination of our
@@ -350,7 +350,7 @@ be be included verbatum in the output, or objects with the following properties:
 * *align* – (Default: left) Possible values "left", "right" and "center". Works
   as you'd expect from word processors.
 * *length* – Provides a single value for both *minLength* and *maxLength*. If both
-  *length* and *minLength or *maxLength* are specifed then the latter take precedence.
+  *length* and *minLength or *maxLength* are specified then the latter take precedence.
 * *value* – A literal value to use for this template item.
 * *default* – A default value to use for this template item if a value
   wasn't otherwise passed in.
