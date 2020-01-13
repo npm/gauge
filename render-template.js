@@ -1,7 +1,6 @@
 'use strict'
 var align = require('wide-align')
 var validate = require('aproba')
-var objectAssign = require('object-assign')
 var wideTruncate = require('./wide-truncate')
 var error = require('./error')
 var TemplateItem = require('./template-item')
@@ -34,7 +33,7 @@ function hasPreOrPost (item, values) {
 }
 
 function generatePreAndPost (baseItem, parentValues) {
-  var item = objectAssign({}, baseItem)
+  var item = Object.assign({}, baseItem)
   var values = Object.create(parentValues)
   var template = []
   var pre = preType(item)
