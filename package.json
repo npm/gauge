@@ -4,8 +4,7 @@
   "description": "A terminal based horizontal guage",
   "main": "index.js",
   "scripts": {
-    "test": "standard && tap test/*.js --coverage",
-    "prepublish": "rm -f *~"
+    "test": "standard && tap test/*.js --coverage"
   },
   "repository": {
     "type": "git",
