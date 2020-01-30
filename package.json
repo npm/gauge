@@ -59,5 +59,8 @@
     "theme-set.js",
     "themes.js",
     "wide-truncate.js"
-  ]
+  ],
+  "engines": {
+    "node": ">=10"
+  }
 }
