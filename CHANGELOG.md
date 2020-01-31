@@ -1,3 +1,6 @@
+### v3.0.0
+* Drops support for Node v4, v6, v7 and v8
+
 ### v2.7.4
 
 * Reset colors prior to ending a line, to eliminate flicker when a line
