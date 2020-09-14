@@ -1,6 +1,5 @@
 'use strict'
 var test = require('tap').test
-var objectAssign = require('object-assign')
 var TemplateItem = require('../template-item.js')
 
 var width = 200
@@ -26,7 +25,7 @@ function got (values) {
 }
 
 function expected (obj) {
-  return objectAssign({}, defaults, obj)
+  return Object.assign({}, defaults, obj)
 }
 
 test('new', function (t) {
