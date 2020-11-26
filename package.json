@@ -1,7 +1,7 @@
 {
   "name": "gauge",
   "version": "3.0.0",
-  "description": "A terminal based horizontal guage",
+  "description": "A terminal based horizontal gauge",
   "main": "index.js",
   "scripts": {
     "test": "standard && tap test/*.js --coverage"
