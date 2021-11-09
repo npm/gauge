@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const themes = require('../themes.js')
+const themes = require('../lib/themes.js')
 
 t.test('selector', function (t) {
   t.equal(themes({hasUnicode: false, hasColor: false, platform: 'unknown'}), themes.getTheme('ASCII'), 'fallback')

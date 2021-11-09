@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const renderTemplate = require('../render-template')
+const renderTemplate = require('../lib/render-template')
 
 t.test('renderTemplate', function (t) {
   var result

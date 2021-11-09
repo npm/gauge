@@ -1,10 +1,10 @@
 'use strict'
 const t = require('tap')
-const baseTheme = t.mock('../base-theme.js', {
-  '../spin.js': function (theme, spun) {
+const baseTheme = t.mock('../lib/base-theme.js', {
+  '../lib/spin.js': function (theme, spun) {
     return [theme, spun]
   },
-  '../progress-bar.js': function (theme, width, completed) {
+  '../lib/progress-bar.js': function (theme, width, completed) {
     return [theme, width, completed]
   }
 })

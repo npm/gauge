@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const progressBar = require('../progress-bar')
+const progressBar = require('../lib/progress-bar')
 
 t.test('progressBar', function (t) {
   var theme = {

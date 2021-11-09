@@ -1,7 +1,7 @@
 'use strict'
 const t = require('tap')
-const Plumbing = t.mock('../plumbing.js', {
-  '../render-template.js': function (width, template, values) {
+const Plumbing = t.mock('../lib/plumbing.js', {
+  '../lib/render-template.js': function (width, template, values) {
     if (values.x) values.x = values.x // pull in from parent object for stringify
     return 'w:' + width + ', t:' + JSON.stringify(template) + ', v:' + JSON.stringify(values)
   },

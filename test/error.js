@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const error = require('../error.js')
+const error = require('../lib/error.js')
 
 t.test('User', async t => {
   var msg = 'example'
