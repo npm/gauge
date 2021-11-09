@@ -1,5 +1,4 @@
 'use strict'
-var objectAssign = require('object-assign')
 
 module.exports = function () {
   return ThemeSetProto.newThemeSet()
@@ -14,7 +13,7 @@ ThemeSetProto.newTheme = function (parent, theme) {
     theme = parent
     parent = this.baseTheme
   }
-  return objectAssign({}, parent, theme)
+  return Object.assign({}, parent, theme)
 }
 
 ThemeSetProto.getThemeNames = function () {
@@ -28,9 +27,9 @@ ThemeSetProto.addTheme = function (name, parent, theme) {
 ThemeSetProto.addToAllThemes = function (theme) {
   var themes = this.themes
   Object.keys(themes).forEach(function (name) {
-    objectAssign(themes[name], theme)
+    Object.assign(themes[name], theme)
   })
-  objectAssign(this.baseTheme, theme)
+  Object.assign(this.baseTheme, theme)
 }
 
 ThemeSetProto.getTheme = function (name) {
@@ -76,7 +75,7 @@ ThemeSetProto.getDefault = function (opts) {
   if (platform[hasUnicode][hasColor]) {
     return this.getTheme(platform[hasUnicode][hasColor])
   } else {
-    return this.getDefault(objectAssign({}, opts, {platform: 'fallback'}))
+    return this.getDefault(Object.assign({}, opts, {platform: 'fallback'}))
   }
 }
 
@@ -106,9 +105,9 @@ ThemeSetProto.newThemeSet = function () {
   var themeset = function (opts) {
     return themeset.getDefault(opts)
   }
-  return objectAssign(themeset, ThemeSetProto, {
-    themes: objectAssign({}, this.themes),
-    baseTheme: objectAssign({}, this.baseTheme),
+  return Object.assign(themeset, ThemeSetProto, {
+    themes: Object.assign({}, this.themes),
+    baseTheme: Object.assign({}, this.baseTheme),
     defaults: JSON.parse(JSON.stringify(this.defaults || {}))
   })
 }
