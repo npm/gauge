@@ -1,14 +1,19 @@
-# Coverage data
-.nyc_output
-coverage
+# This file is automatically added by @npmcli/template-oss. Do not edit.
 
-# Locally installed deps
-node_modules
+# ignore everything in the root
+/*
 
-# Editor cruft
-*~
-.#*
-
-# MacOS cruft
-.DS_Store
-Thumbs.db
+# keep these
+!/.eslintrc*
+!/.github
+!**/.gitignore
+!/package.json
+!/package-lock.json
+!/bin
+!/lib
+!/map.js
+!/tap-snapshots
+!/test
+!/README*
+!/LICENSE*
+!/SECURITY*

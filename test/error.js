@@ -11,8 +11,8 @@ t.test('User', async t => {
 })
 
 t.test('MissingTemplateValue', async t => {
-  var item = {type: 'abc'}
-  var values = {'abc': 'def', 'ghi': 'jkl'}
+  var item = { type: 'abc' }
+  var values = { abc: 'def', ghi: 'jkl' }
   var user = new error.MissingTemplateValue(item, values)
   t.ok(user instanceof Error, 'isa Error')
   t.equal(user.code, 'EGAUGE', 'code')

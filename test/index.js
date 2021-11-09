@@ -10,7 +10,9 @@ function Sink () {
   stream.Writable.call(this, arguments)
 }
 util.inherits(Sink, stream.Writable)
-Sink.prototype._write = function (data, enc, cb) { cb() }
+Sink.prototype._write = function (data, enc, cb) {
+  cb()
+}
 
 const results = new EventEmitter()
 function MockPlumbing (theme, template, columns) {
@@ -30,9 +32,11 @@ function RecordCall (name) {
   }
 }
 
-;['setTheme', 'setTemplate', 'setWidth', 'hide', 'show', 'hideCursor', 'showCursor'].forEach(function (fn) {
-  MockPlumbing.prototype[fn] = RecordCall(fn)
-})
+['setTheme', 'setTemplate', 'setWidth', 'hide', 'show', 'hideCursor', 'showCursor'].forEach(
+  function (fn) {
+    MockPlumbing.prototype[fn] = RecordCall(fn)
+  }
+)
 
 t.test('defaults', async t => {
   let gauge = new Gauge(process.stdout)
@@ -60,7 +64,7 @@ t.test('construct', async t => {
     template: ['TEMPLATE'],
     enabled: false,
     updateInterval: 0,
-    fixedFramerate: false
+    fixedFramerate: false,
   })
   t.ok(gauge)
   t.equal(results.columns, 15, 'width passed through')
@@ -82,12 +86,16 @@ t.test('show & pulse: fixedframerate', t => {
   const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     updateInterval: 10,
-    fixedFramerate: true
+    fixedFramerate: true,
   })
   gauge.show('NAME', 0.1)
   results.once('called:show', checkBasicShow)
   function checkBasicShow (args) {
-    t.strictSame(args, [{ spun: 0, section: 'NAME', subsection: '', completed: 0.1 }], 'check basic show')
+    t.strictSame(
+      args,
+      [{ spun: 0, section: 'NAME', subsection: '', completed: 0.1 }],
+      'check basic show'
+    )
 
     gauge.show('S')
     gauge.pulse()
@@ -95,7 +103,7 @@ t.test('show & pulse: fixedframerate', t => {
   }
   function checkPulse (args) {
     t.strictSame(args, [
-      { spun: 1, section: 'S', subsection: '', completed: 0.1 }
+      { spun: 1, section: 'S', subsection: '', completed: 0.1 },
     ], 'check pulse')
 
     gauge.pulse('P')
@@ -103,7 +111,7 @@ t.test('show & pulse: fixedframerate', t => {
   }
   function checkPulseWithArg (args) {
     t.strictSame(args, [
-      { spun: 2, section: 'S', subsection: 'P', completed: 0.1 }
+      { spun: 2, section: 'S', subsection: 'P', completed: 0.1 },
     ], 'check pulse w/ arg')
 
     gauge.disable()
@@ -123,7 +131,7 @@ t.test('window resizing', t => {
   const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     updateInterval: 0,
-    fixedFramerate: true
+    fixedFramerate: true,
   })
   gauge.show('NAME', 0.1)
 
@@ -132,7 +140,7 @@ t.test('window resizing', t => {
       section: 'NAME',
       subsection: '',
       completed: 0.1,
-      spun: 0
+      spun: 0,
     }])
 
     results.once('called:setWidth', lookForResize)
@@ -150,7 +158,7 @@ t.test('window resizing', t => {
       section: 'NAME',
       subsection: '',
       completed: 0.5,
-      spun: 0
+      spun: 0,
     }])
     gauge.disable()
     clearTimeout(testtimeout)
@@ -181,7 +189,7 @@ t.test('hideCursor:true', t => {
     enabled: true,
     updateInterval: 90,
     fixedFramerate: true,
-    hideCursor: true
+    hideCursor: true,
   })
   collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
@@ -193,8 +201,8 @@ t.test('hideCursor:true', t => {
         spun: 0,
         section: 'NAME',
         subsection: '',
-        completed: 0.5
-      }]]
+        completed: 0.5,
+      }]],
     ]
     t.strictSame(got, expected, 'hideCursor')
     gauge.disable()
@@ -213,7 +221,7 @@ test('hideCursor:false', t => {
     enabled: true,
     updateInterval: 90,
     fixedFramerate: true,
-    hideCursor: false
+    hideCursor: false,
   })
   collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
@@ -223,8 +231,8 @@ test('hideCursor:false', t => {
         spun: 0,
         section: 'NAME',
         subsection: '',
-        completed: 0.5
-      }]]
+        completed: 0.5,
+      }]],
     ]
     t.strictSame(got, expected, 'do not hideCursor')
     gauge.disable()
