@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const ThemeSet = require('../theme-set.js')
+const ThemeSet = require('../lib/theme-set.js')
 
 const themes = new ThemeSet()
 themes.addTheme('fallback', {id: 0})

@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const wideTruncate = require('../wide-truncate.js')
+const wideTruncate = require('../lib/wide-truncate.js')
 
 t.test('wideTruncate', function (t) {
   let result

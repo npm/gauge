@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const spin = require('../spin')
+const spin = require('../lib/spin')
 
 t.test('spin', function (t) {
   t.plan(2)

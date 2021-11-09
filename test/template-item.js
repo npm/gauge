@@ -1,6 +1,6 @@
 'use strict'
 const t = require('tap')
-const TemplateItem = require('../template-item.js')
+const TemplateItem = require('../lib/template-item.js')
 
 const width = 200
 const defaults = {

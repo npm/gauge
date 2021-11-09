@@ -1,7 +1,7 @@
 'use strict'
 const t = require('tap')
 const test = require('tap').test
-const Gauge = require('../index')
+const Gauge = require('..')
 const stream = require('readable-stream')
 const util = require('util')
 const EventEmitter = require('events').EventEmitter
