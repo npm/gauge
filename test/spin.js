@@ -1,13 +1,13 @@
 'use strict'
-var test = require('tap').test
-var spin = require('../spin')
+const t = require('tap')
+const spin = require('../spin')
 
-test('spin', function (t) {
+t.test('spin', function (t) {
   t.plan(2)
-  var spinner = '123456'
-  var result
+  const spinner = '123456'
+  let result
   result = spin(spinner, 1)
-  t.is(result, '2', 'Spinner 1')
+  t.equal(result, '2', 'Spinner 1')
   result = spin(spinner, 10)
-  t.is(result, '5', 'Spinner 10')
+  t.equal(result, '5', 'Spinner 10')
 })

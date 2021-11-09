@@ -1,9 +1,10 @@
 'use strict'
-var test = require('tap').test
-var Gauge = require('../index')
-var stream = require('readable-stream')
-var util = require('util')
-var EventEmitter = require('events').EventEmitter
+const t = require('tap')
+const test = require('tap').test
+const Gauge = require('../index')
+const stream = require('readable-stream')
+const util = require('util')
+const EventEmitter = require('events').EventEmitter
 
 function Sink () {
   stream.Writable.call(this, arguments)
@@ -11,7 +12,7 @@ function Sink () {
 util.inherits(Sink, stream.Writable)
 Sink.prototype._write = function (data, enc, cb) { cb() }
 
-var results = new EventEmitter()
+const results = new EventEmitter()
 function MockPlumbing (theme, template, columns) {
   results.theme = theme
   results.template = template
@@ -22,7 +23,7 @@ MockPlumbing.prototype = {}
 
 function RecordCall (name) {
   return function () {
-    var args = Array.prototype.slice.call(arguments)
+    const args = Array.prototype.slice.call(arguments)
     results.emit('called', [name, args])
     results.emit('called:' + name, args)
     return ''
@@ -33,28 +34,27 @@ function RecordCall (name) {
   MockPlumbing.prototype[fn] = RecordCall(fn)
 })
 
-test('defaults', function (t) {
-  var gauge = new Gauge(process.stdout)
-  t.is(gauge._disabled, !process.stdout.isTTY, 'disabled')
-  t.is(gauge._updateInterval, 50, 'updateInterval')
+t.test('defaults', async t => {
+  let gauge = new Gauge(process.stdout)
+  t.equal(gauge._disabled, !process.stdout.isTTY, 'disabled')
+  t.equal(gauge._updateInterval, 50, 'updateInterval')
   if (process.stdout.isTTY) {
-    t.is(gauge._tty, process.stdout, 'tty')
+    t.equal(gauge._tty, process.stdout, 'tty')
     gauge.disable()
     gauge = new Gauge(process.stderr)
-    t.is(gauge._tty, process.stdout, 'tty is stdout when writeTo is stderr')
+    t.equal(gauge._tty, process.stdout, 'tty is stdout when writeTo is stderr')
   }
   gauge.disable()
   gauge = new Gauge(new Sink())
-  t.is(gauge._tty, undefined, 'non-tty stream is not tty')
+  t.equal(gauge._tty, undefined, 'non-tty stream is not tty')
   gauge.disable()
-  t.end()
 })
 
-test('construct', function (t) {
-  var output = new Sink()
+t.test('construct', async t => {
+  const output = new Sink()
   output.isTTY = true
   output.columns = 16
-  var gauge = new Gauge(output, {
+  const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     theme: ['THEME'],
     template: ['TEMPLATE'],
@@ -63,25 +63,23 @@ test('construct', function (t) {
     fixedFramerate: false
   })
   t.ok(gauge)
-  t.is(results.columns, 15, 'width passed through')
+  t.equal(results.columns, 15, 'width passed through')
   t.same(results.theme, ['THEME'], 'theme passed through')
   t.same(results.template, ['TEMPLATE'], 'template passed through')
-  t.is(gauge.isEnabled(), false, 'disabled')
-
-  t.done()
+  t.equal(gauge.isEnabled(), false, 'disabled')
 })
 
-test('show & pulse: fixedframerate', function (t) {
+t.test('show & pulse: fixedframerate', t => {
   t.plan(3)
   // this helps us abort if something never emits an event
   // it also keeps things alive long enough to actually get output =D
-  var testtimeout = setTimeout(function () {
+  const testtimeout = setTimeout(function () {
     t.end()
   }, 1000)
-  var output = new Sink()
+  const output = new Sink()
   output.isTTY = true
   output.columns = 16
-  var gauge = new Gauge(output, {
+  const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     updateInterval: 10,
     fixedFramerate: true
@@ -89,14 +87,14 @@ test('show & pulse: fixedframerate', function (t) {
   gauge.show('NAME', 0.1)
   results.once('called:show', checkBasicShow)
   function checkBasicShow (args) {
-    t.isDeeply(args, [{ spun: 0, section: 'NAME', subsection: '', completed: 0.1 }], 'check basic show')
+    t.strictSame(args, [{ spun: 0, section: 'NAME', subsection: '', completed: 0.1 }], 'check basic show')
 
     gauge.show('S')
     gauge.pulse()
     results.once('called:show', checkPulse)
   }
   function checkPulse (args) {
-    t.isDeeply(args, [
+    t.strictSame(args, [
       { spun: 1, section: 'S', subsection: '', completed: 0.1 }
     ], 'check pulse')
 
@@ -104,25 +102,25 @@ test('show & pulse: fixedframerate', function (t) {
     results.once('called:show', checkPulseWithArg)
   }
   function checkPulseWithArg (args) {
-    t.isDeeply(args, [
+    t.strictSame(args, [
       { spun: 2, section: 'S', subsection: 'P', completed: 0.1 }
     ], 'check pulse w/ arg')
 
     gauge.disable()
     clearTimeout(testtimeout)
-    t.done()
+    t.end()
   }
 })
 
-test('window resizing', function (t) {
-  var testtimeout = setTimeout(function () {
+t.test('window resizing', t => {
+  const testtimeout = setTimeout(function () {
     t.end()
   }, 1000)
-  var output = new Sink()
+  const output = new Sink()
   output.isTTY = true
   output.columns = 32
 
-  var gauge = new Gauge(output, {
+  const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     updateInterval: 0,
     fixedFramerate: true
@@ -130,7 +128,7 @@ test('window resizing', function (t) {
   gauge.show('NAME', 0.1)
 
   results.once('called:show', function (args) {
-    t.isDeeply(args, [{
+    t.strictSame(args, [{
       section: 'NAME',
       subsection: '',
       completed: 0.1,
@@ -144,11 +142,11 @@ test('window resizing', function (t) {
     gauge.show('NAME', 0.5)
   })
   function lookForResize (args) {
-    t.isDeeply(args, [15])
+    t.strictSame(args, [15])
     results.once('called:show', lookForShow)
   }
   function lookForShow (args) {
-    t.isDeeply(args, [{
+    t.strictSame(args, [{
       section: 'NAME',
       subsection: '',
       completed: 0.5,
@@ -156,12 +154,12 @@ test('window resizing', function (t) {
     }])
     gauge.disable()
     clearTimeout(testtimeout)
-    t.done()
+    t.end()
   }
 })
 
 function collectResults (time, cb) {
-  var collected = []
+  const collected = []
   function collect (called) {
     collected.push(called)
   }
@@ -172,11 +170,11 @@ function collectResults (time, cb) {
   }, time)
 }
 
-test('hideCursor:true', function (t) {
-  var output = new Sink()
+t.test('hideCursor:true', t => {
+  const output = new Sink()
   output.isTTY = true
   output.columns = 16
-  var gauge = new Gauge(output, {
+  const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     theme: ['THEME'],
     template: ['TEMPLATE'],
@@ -187,9 +185,9 @@ test('hideCursor:true', function (t) {
   })
   collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
-  t.is(gauge.isEnabled(), true, 'enabled')
+  t.equal(gauge.isEnabled(), true, 'enabled')
   function andCursorHidden (got) {
-    var expected = [
+    const expected = [
       ['hideCursor', []],
       ['show', [{
         spun: 0,
@@ -198,17 +196,17 @@ test('hideCursor:true', function (t) {
         completed: 0.5
       }]]
     ]
-    t.isDeeply(got, expected, 'hideCursor')
+    t.strictSame(got, expected, 'hideCursor')
     gauge.disable()
     t.end()
   }
 })
 
-test('hideCursor:false', function (t) {
-  var output = new Sink()
+test('hideCursor:false', t => {
+  const output = new Sink()
   output.isTTY = true
   output.columns = 16
-  var gauge = new Gauge(output, {
+  const gauge = new Gauge(output, {
     Plumbing: MockPlumbing,
     theme: ['THEME'],
     template: ['TEMPLATE'],
@@ -220,7 +218,7 @@ test('hideCursor:false', function (t) {
   collectResults(100, andCursorHidden)
   gauge.show('NAME', 0.5)
   function andCursorHidden (got) {
-    var expected = [
+    const expected = [
       ['show', [{
         spun: 0,
         section: 'NAME',
@@ -228,50 +226,50 @@ test('hideCursor:false', function (t) {
         completed: 0.5
       }]]
     ]
-    t.isDeeply(got, expected, 'do not hideCursor')
+    t.strictSame(got, expected, 'do not hideCursor')
     gauge.disable()
     t.end()
   }
 })
 
-/* todo missing:
+// [> todo missing:
 
-constructor
-  arg2 is writeTo, arg1 is opts
-  arg2 is writeTo, arg1 is null
-  no args, all defaults
+// constructor
+//   arg2 is writeTo, arg1 is opts
+//   arg2 is writeTo, arg1 is null
+//   no args, all defaults
 
-setTemplate
-setThemeset
-setTheme
-  w/ theme selector
-  w/ theme name
-  w/ theme object
-setWriteTo
-  while enabled/disabled
-  w/ tty
-  w/o tty & writeTo = process.stderr & process.stdout isTTY
-  w/o tty & writeTo = process.stderr & process.stdout !isTTY
-enable
-  w/ _showing = true
-hide
-  w/ disabled
-  w/ !disabled & !showing
-  w/ !disabled & showing
-  w/ these & cb
-show
-  w/ disabled
-  w/ object arg1
-pulse
-  w/ disabled
-  w/ !showing
+// setTemplate
+// setThemeset
+// setTheme
+//   w/ theme selector
+//   w/ theme name
+//   w/ theme object
+// setWriteTo
+//   while enabled/disabled
+//   w/ tty
+//   w/o tty & writeTo = process.stderr & process.stdout isTTY
+//   w/o tty & writeTo = process.stderr & process.stdout !isTTY
+// enable
+//   w/ _showing = true
+// hide
+//   w/ disabled
+//   w/ !disabled & !showing
+//   w/ !disabled & showing
+//   w/ these & cb
+// show
+//   w/ disabled
+//   w/ object arg1
+// pulse
+//   w/ disabled
+//   w/ !showing
 
-anything to do with _fixedFramerate
+// anything to do with _fixedFramerate
 
-trigger _doRedraw
-  w/o showing & w/o _onScreen (eg, hide, show, hide, I think)
-  w/o _needsRedraw
+// trigger _doRedraw
+//   w/o showing & w/o _onScreen (eg, hide, show, hide, I think)
+//   w/o _needsRedraw
 
-Everything to do with back pressure from _writeTo
+// Everything to do with back pressure from _writeTo
 
-*/
+// */

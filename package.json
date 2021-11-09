@@ -35,7 +35,7 @@
     "readable-stream": "^2.0.6",
     "require-inject": "^1.4.0",
     "standard": "^11.0.1",
-    "tap": "^12.0.1",
+    "tap": "^15.0.10",
     "through2": "^2.0.0"
   },
   "files": [
@@ -61,5 +61,11 @@
   ],
   "engines": {
     "node": ">=10"
+  },
+  "tap": {
+    "branches": 79,
+    "statements": 89,
+    "functions": 92,
+    "lines": 93
   }
 }

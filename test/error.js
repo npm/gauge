@@ -1,33 +1,30 @@
 'use strict'
-var test = require('tap').test
-var error = require('../error.js')
+const t = require('tap')
+const error = require('../error.js')
 
-test('User', function (t) {
+t.test('User', async t => {
   var msg = 'example'
   var user = new error.User(msg)
   t.ok(user instanceof Error, 'isa Error')
-  t.is(user.code, 'EGAUGE', 'code')
-  t.is(user.message, msg, 'maintained message')
-  t.done()
+  t.equal(user.code, 'EGAUGE', 'code')
+  t.equal(user.message, msg, 'maintained message')
 })
 
-test('MissingTemplateValue', function (t) {
+t.test('MissingTemplateValue', async t => {
   var item = {type: 'abc'}
   var values = {'abc': 'def', 'ghi': 'jkl'}
   var user = new error.MissingTemplateValue(item, values)
   t.ok(user instanceof Error, 'isa Error')
-  t.is(user.code, 'EGAUGE', 'code')
-  t.like(user.message, new RegExp(item.type), 'contains type')
-  t.isDeeply(user.template, item, 'passed through template item')
-  t.isDeeply(user.values, values, 'passed through values')
-  t.done()
+  t.equal(user.code, 'EGAUGE', 'code')
+  t.match(user.message, new RegExp(item.type), 'contains type')
+  t.strictSame(user.template, item, 'passed through template item')
+  t.strictSame(user.values, values, 'passed through values')
 })
 
-test('Internal', function (t) {
+t.test('Internal', async t => {
   var msg = 'example'
   var user = new error.Internal(msg)
   t.ok(user instanceof Error, 'isa Error')
-  t.is(user.code, 'EGAUGEINTERNAL', 'code')
-  t.is(user.message, msg, 'maintained message')
-  t.done()
+  t.equal(user.code, 'EGAUGEINTERNAL', 'code')
+  t.equal(user.message, msg, 'maintained message')
 })

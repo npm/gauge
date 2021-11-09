@@ -1,8 +1,8 @@
 'use strict'
-var test = require('tap').test
-var ThemeSet = require('../theme-set.js')
+const t = require('tap')
+const ThemeSet = require('../theme-set.js')
 
-var themes = new ThemeSet()
+const themes = new ThemeSet()
 themes.addTheme('fallback', {id: 0})
 themes.addTheme('test1', {id: 1})
 themes.addTheme('test2', {id: 2})
@@ -20,41 +20,41 @@ themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: true}, 'test2')
 themes.setDefault({platform: 'zz', hasUnicode: false, hasColor: true}, 'test3')
 themes.setDefault({platform: 'zz', hasUnicode: true, hasColor: false}, 'test4')
 
-test('themeset', function (t) {
-  t.is(themes().id, 0, 'fallback')
+t.test('themeset', function (t) {
+  t.equal(themes().id, 0, 'fallback')
 
-  t.is(themes({platform: 'aa'}).id, 1, 'aa ff')
-  t.is(themes({platform: 'aa', hasUnicode: true}).id, 1, 'aa tf')
-  t.is(themes({platform: 'aa', hasColor: true}).id, 1, 'aa ft')
-  t.is(themes({platform: 'aa', hasUnicode: true, hasColor: true}).id, 1, 'aa tt')
-  t.is(themes({platform: 'bb'}).id, 0, 'bb ff')
-  t.is(themes({platform: 'bb', hasUnicode: true}).id, 0, 'bb tf')
-  t.is(themes({platform: 'bb', hasColor: true}).id, 0, 'bb ft')
-  t.is(themes({platform: 'bb', hasUnicode: true, hasColor: true}).id, 2, 'bb tt')
+  t.equal(themes({platform: 'aa'}).id, 1, 'aa ff')
+  t.equal(themes({platform: 'aa', hasUnicode: true}).id, 1, 'aa tf')
+  t.equal(themes({platform: 'aa', hasColor: true}).id, 1, 'aa ft')
+  t.equal(themes({platform: 'aa', hasUnicode: true, hasColor: true}).id, 1, 'aa tt')
+  t.equal(themes({platform: 'bb'}).id, 0, 'bb ff')
+  t.equal(themes({platform: 'bb', hasUnicode: true}).id, 0, 'bb tf')
+  t.equal(themes({platform: 'bb', hasColor: true}).id, 0, 'bb ft')
+  t.equal(themes({platform: 'bb', hasUnicode: true, hasColor: true}).id, 2, 'bb tt')
 
-  t.is(themes({platform: 'ab'}).id, 0, 'ab ff')
-  t.is(themes({platform: 'ab', hasUnicode: true}).id, 0, 'ab tf')
-  t.is(themes({platform: 'ab', hasColor: true}).id, 3, 'ab ft')
-  t.is(themes({platform: 'ab', hasUnicode: true, hasColor: true}).id, 3, 'ab tt')
+  t.equal(themes({platform: 'ab'}).id, 0, 'ab ff')
+  t.equal(themes({platform: 'ab', hasUnicode: true}).id, 0, 'ab tf')
+  t.equal(themes({platform: 'ab', hasColor: true}).id, 3, 'ab ft')
+  t.equal(themes({platform: 'ab', hasUnicode: true, hasColor: true}).id, 3, 'ab tt')
 
-  t.is(themes({platform: 'ba'}).id, 0, 'ba ff')
-  t.is(themes({platform: 'ba', hasUnicode: true}).id, 4, 'ba tf')
-  t.is(themes({platform: 'ba', hasColor: true}).id, 0, 'ba ft')
-  t.is(themes({platform: 'ba', hasUnicode: true, hasColor: true}).id, 4, 'ba tt')
+  t.equal(themes({platform: 'ba'}).id, 0, 'ba ff')
+  t.equal(themes({platform: 'ba', hasUnicode: true}).id, 4, 'ba tf')
+  t.equal(themes({platform: 'ba', hasColor: true}).id, 0, 'ba ft')
+  t.equal(themes({platform: 'ba', hasUnicode: true, hasColor: true}).id, 4, 'ba tt')
 
-  t.is(themes({platform: 'zz'}).id, 1, 'zz ff')
-  t.is(themes({platform: 'zz', hasUnicode: true}).id, 4, 'zz tf')
-  t.is(themes({platform: 'zz', hasColor: true}).id, 3, 'zz ft')
-  t.is(themes({platform: 'zz', hasUnicode: true, hasColor: true}).id, 2, 'zz tt')
+  t.equal(themes({platform: 'zz'}).id, 1, 'zz ff')
+  t.equal(themes({platform: 'zz', hasUnicode: true}).id, 4, 'zz tf')
+  t.equal(themes({platform: 'zz', hasColor: true}).id, 3, 'zz ft')
+  t.equal(themes({platform: 'zz', hasUnicode: true, hasColor: true}).id, 2, 'zz tt')
 
   try {
     themes.getTheme('does not exist')
     t.fail('missing theme')
   } catch (ex) {
-    t.is(ex.code, 'EMISSINGTHEME', 'missing theme')
+    t.equal(ex.code, 'EMISSINGTHEME', 'missing theme')
   }
 
-  t.is(themes.getTheme('testz').id, 'z', 'testz')
+  t.equal(themes.getTheme('testz').id, 'z', 'testz')
 
   var empty = new ThemeSet()
 
@@ -62,7 +62,7 @@ test('themeset', function (t) {
     empty()
     t.fail('no themes')
   } catch (ex) {
-    t.is(ex.code, 'EMISSINGTHEME', 'no themes')
+    t.equal(ex.code, 'EMISSINGTHEME', 'no themes')
   }
 
   empty.addTheme('exists', {id: 'exists'})
@@ -71,18 +71,18 @@ test('themeset', function (t) {
     empty()
     t.fail('no fallback')
   } catch (ex) {
-    t.is(ex.code, 'EMISSINGTHEME', 'no fallback')
+    t.equal(ex.code, 'EMISSINGTHEME', 'no fallback')
   }
-  t.done()
+  t.end()
 })
 
-test('add-to-all', function (t) {
+t.test('add-to-all', function (t) {
   themes.addToAllThemes({
     'xyz': 17
   })
-  t.is(themes.getTheme('test1').xyz, 17, 'existing themes updated')
+  t.equal(themes.getTheme('test1').xyz, 17, 'existing themes updated')
   var newTheme = themes.newTheme({id: 99})
-  t.is(newTheme.id, 99, 'new theme initialized')
-  t.is(newTheme.xyz, 17, 'new theme got extension')
-  t.done()
+  t.equal(newTheme.id, 99, 'new theme initialized')
+  t.equal(newTheme.xyz, 17, 'new theme got extension')
+  t.end()
 })
