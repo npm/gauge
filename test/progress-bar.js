@@ -5,7 +5,7 @@ const progressBar = require('../lib/progress-bar')
 t.test('progressBar', function (t) {
   var theme = {
     complete: '#',
-    remaining: '-'
+    remaining: '-',
   }
   var result
   result = progressBar(theme, 10, 0)
@@ -23,7 +23,7 @@ t.test('progressBar', function (t) {
 
   var multicharTheme = {
     complete: '123',
-    remaining: 'abc'
+    remaining: 'abc',
   }
   result = progressBar(multicharTheme, 10, 0)
   t.equal(result, 'abcabcabca', '0% bar')
