@@ -41,7 +41,7 @@
     "wide-align": "^1.1.2"
   },
   "devDependencies": {
-    "@npmcli/template-oss": "^2.2.0",
+    "@npmcli/template-oss": "^2.3.0",
     "readable-stream": "^3.6.0",
     "tap": "^15.0.10"
   },
@@ -58,5 +58,5 @@
     "functions": 92,
     "lines": 90
   },
-  "templateVersion": "2.2.0"
+  "templateVersion": "2.3.0"
 }

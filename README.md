@@ -18,7 +18,7 @@ setTimeout(() => gauge.hide(), 2300)
 
 See also the [demos](demo.js):
 
-![](gauge-demo.gif)
+![](./docs/gauge-demo.gif)
 
 
 ### CHANGES FROM 1.x
