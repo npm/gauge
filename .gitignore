@@ -9,11 +9,14 @@
 !**/.gitignore
 !/package.json
 !/package-lock.json
+!/docs
 !/bin
 !/lib
 !/map.js
 !/tap-snapshots
 !/test
+!/scripts
 !/README*
 !/LICENSE*
 !/SECURITY*
+!/CHANGELOG*
