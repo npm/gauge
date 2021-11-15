@@ -1,5 +1,18 @@
+### v4.0.0
+
+* BREAKING CHANGE: Drops support for Node v10 and non-LTS versions of v12 and v14
+* feat: install template-oss
+* fix: repository metadata
+* fix: Typo in package.json
+* fix: Remove remaining uses of object-assign
+* fix: remove object-assign
+
+### v3.0.1
+
+* deps: object-assign@4.1.1
+
 ### v3.0.0
-* Drops support for Node v4, v6, v7 and v8
+* BREAKING CHANGE: Drops support for Node v4, v6, v7 and v8
 
 ### v2.7.4
 
