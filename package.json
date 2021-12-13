@@ -1,6 +1,6 @@
 {
   "name": "gauge",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A terminal based horizontal guage",
   "main": "index.js",
   "scripts": {
