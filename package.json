@@ -44,7 +44,7 @@
   "devDependencies": {
     "@npmcli/template-oss": "^2.7.1",
     "readable-stream": "^3.6.0",
-    "tap": "^15.0.10"
+    "tap": "^15.1.6"
   },
   "files": [
     "bin",
