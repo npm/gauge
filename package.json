@@ -39,7 +39,7 @@
     "signal-exit": "^3.0.0",
     "string-width": "^4.2.3",
     "strip-ansi": "^6.0.1",
-    "wide-align": "^1.1.2"
+    "wide-align": "^1.1.5"
   },
   "devDependencies": {
     "@npmcli/template-oss": "^2.7.1",
