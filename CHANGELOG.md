@@ -7,6 +7,13 @@
 * fix: Remove remaining uses of object-assign
 * fix: remove object-assign
 
+### [4.0.1](https://www.github.com/npm/gauge/compare/v4.0.0...v4.0.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* use more commonly available character for pre/post progressbar ([#141](https://www.github.com/npm/gauge/issues/141)) ([13d3046](https://www.github.com/npm/gauge/commit/13d30466b56015cb75df366371cf85234a8a517f))
+
 ### v3.0.1
 
 * deps: object-assign@4.1.1

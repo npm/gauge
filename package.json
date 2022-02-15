@@ -1,6 +1,6 @@
 {
   "name": "gauge",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A terminal based horizontal gauge",
   "main": "lib",
   "scripts": {
