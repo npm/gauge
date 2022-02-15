@@ -36,7 +36,7 @@
     "color-support": "^1.1.2",
     "console-control-strings": "^1.1.0",
     "has-unicode": "^2.0.1",
-    "signal-exit": "^3.0.0",
+    "signal-exit": "^3.0.7",
     "string-width": "^4.2.3",
     "strip-ansi": "^6.0.1",
     "wide-align": "^1.1.5"
