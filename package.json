@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/npm/gauge",
   "dependencies": {
-    "ansi-regex": "^5.0.1",
+    "ansi-regex": "^6.0.1",
     "aproba": "^1.0.3 || ^2.0.0",
     "color-support": "^1.1.2",
     "console-control-strings": "^1.1.0",
