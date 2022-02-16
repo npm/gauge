@@ -7,6 +7,16 @@
 * fix: Remove remaining uses of object-assign
 * fix: remove object-assign
 
+### [4.0.2](https://www.github.com/npm/gauge/compare/v4.0.1...v4.0.2) (2022-02-16)
+
+
+### Dependencies
+
+* update color-support requirement from ^1.1.2 to ^1.1.3 ([5921a0f](https://www.github.com/npm/gauge/commit/5921a0f89e6c4c10ea047a219230809fd4118409))
+* update console-control-strings requirement from ^1.0.0 to ^1.1.0 ([a5ac787](https://www.github.com/npm/gauge/commit/a5ac787a3771e8882f9837fab08ca2985cad609f))
+* update signal-exit requirement from ^3.0.0 to ^3.0.7 ([3e0d399](https://www.github.com/npm/gauge/commit/3e0d39917b10e0f94efd4a4c74a46fa8e21e768a))
+* update wide-align requirement from ^1.1.2 to ^1.1.5 ([ddc9048](https://www.github.com/npm/gauge/commit/ddc90480a6c1caa8c176e0b65a9d8207be846f94))
+
 ### [4.0.1](https://www.github.com/npm/gauge/compare/v4.0.0...v4.0.1) (2022-02-15)
 
 
