@@ -7,6 +7,18 @@
 * fix: Remove remaining uses of object-assign
 * fix: remove object-assign
 
+### [4.0.3](https://www.github.com/npm/gauge/compare/v4.0.2...v4.0.3) (2022-03-10)
+
+
+### Bug Fixes
+
+* move demo.js to the docs folder ([#155](https://www.github.com/npm/gauge/issues/155)) ([1faf8cf](https://www.github.com/npm/gauge/commit/1faf8cf25c0bffb345f6657e20743d83c54d6695))
+
+
+### Dependencies
+
+* remove the unused direct ansi-regex dependency ([#156](https://www.github.com/npm/gauge/issues/156)) ([65be798](https://www.github.com/npm/gauge/commit/65be79895801433e02aef58cafb6f31a87287e59))
+
 ### [4.0.2](https://www.github.com/npm/gauge/compare/v4.0.1...v4.0.2) (2022-02-16)
 
 
