@@ -7,6 +7,13 @@
 * fix: Remove remaining uses of object-assign
 * fix: remove object-assign
 
+### [4.0.4](https://www.github.com/npm/gauge/compare/v4.0.3...v4.0.4) (2022-03-21)
+
+
+### Bug Fixes
+
+* fix always true condition ([#160](https://www.github.com/npm/gauge/issues/160)) ([bebaf0b](https://www.github.com/npm/gauge/commit/bebaf0b0655f0bdc58a6548b04230cd420245e5e))
+
 ### [4.0.3](https://www.github.com/npm/gauge/compare/v4.0.2...v4.0.3) (2022-03-10)
 
 
