@@ -1,3 +1,5 @@
+# Changelog
+
 ### v4.0.0
 
 * BREAKING CHANGE: Drops support for Node v10 and non-LTS versions of v12 and v14
