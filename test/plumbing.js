@@ -57,9 +57,9 @@ t.test('show', function (t) {
 })
 
 t.test('width', function (t) {
-  const plumbing = new Plumbing(theme, template)
+  const defaultWidth = new Plumbing(theme, template)
   t.equal(
-    plumbing.show({ name: 'test' }),
+    defaultWidth.show({ name: 'test' }),
     'w:80, t:[{"type":"name"}], v:{"name":"test"}COLOR:resetERASECR'
   )
   t.end()
