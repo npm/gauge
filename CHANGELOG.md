@@ -1,5 +1,12 @@
 # Changelog
 
+### [4.0.4](https://github.com/npm/gauge/compare/v4.0.3...v4.0.4) (2022-03-28)
+
+
+### Bug Fixes
+
+* fix always true condition ([#160](https://github.com/npm/gauge/issues/160)) ([bebaf0b](https://github.com/npm/gauge/commit/bebaf0b0655f0bdc58a6548b04230cd420245e5e))
+
 ### v4.0.0
 
 * BREAKING CHANGE: Drops support for Node v10 and non-LTS versions of v12 and v14
