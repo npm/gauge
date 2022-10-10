@@ -1,5 +1,15 @@
 # Changelog
 
+## [5.0.0](https://github.com/npm/gauge/compare/v4.0.4...v5.0.0) (2022-10-10)
+
+### ⚠️ BREAKING CHANGES
+
+* `gauge` is now compatible with the following semver range for node: `^14.17.0 || ^16.13.0 || >=18.0.0`
+
+### Features
+
+* [`6f3535a`](https://github.com/npm/gauge/commit/6f3535afd4a37f0ad025b0cb1545b189d826681b) [#181](https://github.com/npm/gauge/pull/181) postinstall for dependabot template-oss PR (@lukekarrys)
+
 ### [4.0.4](https://github.com/npm/gauge/compare/v4.0.3...v4.0.4) (2022-03-28)
 
 
