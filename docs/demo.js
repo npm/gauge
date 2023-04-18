@@ -1,6 +1,6 @@
 var Gauge = require('..')
 var gaugeDefault = require('../lib/themes.js')
-var onExit = require('signal-exit')
+var onExit = require('signal-exit').onExit
 
 var activeGauge
 
