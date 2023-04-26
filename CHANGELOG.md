@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.1](https://github.com/npm/gauge/compare/v5.0.0...v5.0.1) (2023-04-26)
+
+### Dependencies
+
+* [`88057a0`](https://github.com/npm/gauge/commit/88057a0dcba98a0e03e92b6af15b8700ee48ac84) [#199](https://github.com/npm/gauge/pull/199) bump signal-exit from 3.0.7 to 4.0.1 (#199)
+
 ## [5.0.0](https://github.com/npm/gauge/compare/v4.0.4...v5.0.0) (2022-10-10)
 
 ### ⚠️ BREAKING CHANGES
