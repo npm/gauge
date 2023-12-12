@@ -1,5 +1,24 @@
 # Changelog
 
+## [5.0.2](https://github.com/npm/gauge/compare/v5.0.1...v5.0.2) (2023-12-07)
+
+### Chores
+
+* [`752621b`](https://github.com/npm/gauge/commit/752621bb93ef5a4cc8cfcf91a207f00d55781037) [#233](https://github.com/npm/gauge/pull/233) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`c1f37db`](https://github.com/npm/gauge/commit/c1f37dba6187afa07016cc3bb2921aaad19a6f3d) [#233](https://github.com/npm/gauge/pull/233) bump @npmcli/template-oss from 4.21.1 to 4.21.3 (@dependabot[bot])
+* [`b5234e7`](https://github.com/npm/gauge/commit/b5234e7d6b44a8d8ff2b44d2f4e0f8fd28858c8a) [#230](https://github.com/npm/gauge/pull/230) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`03006c4`](https://github.com/npm/gauge/commit/03006c40624f6081c48009a455449589eeb7cd28) [#230](https://github.com/npm/gauge/pull/230) bump @npmcli/template-oss from 4.19.0 to 4.21.1 (@dependabot[bot])
+* [`7aa6aa3`](https://github.com/npm/gauge/commit/7aa6aa3e8b6b389572483d4a8ce97c1cd540bb80) [#210](https://github.com/npm/gauge/pull/210) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`cb0887e`](https://github.com/npm/gauge/commit/cb0887e368e69973e1add0516e45e24c7dcb6285) [#210](https://github.com/npm/gauge/pull/210) bump @npmcli/template-oss from 4.18.1 to 4.19.0 (@dependabot[bot])
+* [`c49296b`](https://github.com/npm/gauge/commit/c49296bd7dfcfcbe0ac1032daedb825b54fed35d) [#209](https://github.com/npm/gauge/pull/209) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`03008f9`](https://github.com/npm/gauge/commit/03008f94f748ac2b58b928b98f951d395664cb05) [#209](https://github.com/npm/gauge/pull/209) bump @npmcli/template-oss from 4.18.0 to 4.18.1 (@dependabot[bot])
+* [`d07fbf1`](https://github.com/npm/gauge/commit/d07fbf1b98c0610951d74dba169484feace1f7c8) [#208](https://github.com/npm/gauge/pull/208) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`15daa22`](https://github.com/npm/gauge/commit/15daa22f9310957971a3d89815a87770da95c706) [#208](https://github.com/npm/gauge/pull/208) bump @npmcli/template-oss from 4.17.0 to 4.18.0 (@dependabot[bot])
+* [`f691a46`](https://github.com/npm/gauge/commit/f691a46b138add159e73f369639a1d260138f225) [#207](https://github.com/npm/gauge/pull/207) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`2c9dfa0`](https://github.com/npm/gauge/commit/2c9dfa09b514560177909aa81a4aaaa913bc53b8) [#207](https://github.com/npm/gauge/pull/207) bump @npmcli/template-oss from 4.15.1 to 4.17.0 (@dependabot[bot])
+* [`76f017c`](https://github.com/npm/gauge/commit/76f017ce59c336e9f1ad83a525a380cdef052831) [#204](https://github.com/npm/gauge/pull/204) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`9fccc39`](https://github.com/npm/gauge/commit/9fccc39adf3c73e562a907f7cc9724927b64e3c6) [#204](https://github.com/npm/gauge/pull/204) bump @npmcli/template-oss from 4.14.1 to 4.15.1 (@dependabot[bot])
+
 ## [5.0.1](https://github.com/npm/gauge/compare/v5.0.0...v5.0.1) (2023-04-26)
 
 ### Dependencies
