@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.2](https://github.com/npm/gauge/compare/v5.0.1...v5.0.2) (2024-04-21)
+
+### Chores
+
+* [`de43130`](https://github.com/npm/gauge/commit/de431308063d58f425c25b9434724bef8676ddc5) [#238](https://github.com/npm/gauge/pull/238) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`ba82947`](https://github.com/npm/gauge/commit/ba829473c0df3bebb6f4d8ec98b951274119b30b) [#238](https://github.com/npm/gauge/pull/238) bump @npmcli/template-oss from 4.21.3 to 4.21.4 (@dependabot[bot])
+
 ## [5.0.1](https://github.com/npm/gauge/compare/v5.0.0...v5.0.1) (2023-04-26)
 
 ### Dependencies
