@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.0.2](https://github.com/npm/gauge/compare/v5.0.1...v5.0.2) (2024-05-04)
+
+### Bug Fixes
+
+* [`d772b3b`](https://github.com/npm/gauge/commit/d772b3b034b60164a4eed59b6bd6275fa14bfdc1) [#239](https://github.com/npm/gauge/pull/239) linting: no-unused-vars (@lukekarrys)
+
+### Chores
+
+* [`c8aec3d`](https://github.com/npm/gauge/commit/c8aec3dc8c8ac12cf42c88eafface85d60243ad4) [#239](https://github.com/npm/gauge/pull/239) bump @npmcli/template-oss to 4.22.0 (@lukekarrys)
+* [`54421e8`](https://github.com/npm/gauge/commit/54421e8076ab455847f9fe71d8444ba7d8e535a7) [#239](https://github.com/npm/gauge/pull/239) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`ba82947`](https://github.com/npm/gauge/commit/ba829473c0df3bebb6f4d8ec98b951274119b30b) [#238](https://github.com/npm/gauge/pull/238) bump @npmcli/template-oss from 4.21.3 to 4.21.4 (@dependabot[bot])
+
 ## [5.0.1](https://github.com/npm/gauge/compare/v5.0.0...v5.0.1) (2023-04-26)
 
 ### Dependencies
